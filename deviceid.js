@@ -1224,7 +1224,12 @@ const resolution = window.screen.width+"x"+window.screen.height;
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                   const timing = performance.now() - end;
-                  const decoded = CryptoJS.AES.decrypt(xhr.responseText, key, { iv: iv}).toString(CryptoJS.enc.Utf8);
+                  var ciphertext = CryptoJS.enc.Base64.parse(xhr.responseText);    // Use Base64-Encoder.       
+                    var encryptedCP = CryptoJS.lib.CipherParams.create({
+                    ciphertext: ciphertext,
+                    formatter: CryptoJS.format.OpenSSL                                     // Optional, but required for encryptedCP.toString() 
+                 });
+                  const decoded = CryptoJS.AES.decrypt(encryptedCP, key, { iv: iv}).toString(CryptoJS.enc.Utf8);
                   const parsed = JSON.parse(decoded);
                   if (parsed['code'] != null) {
                       localStorage.setItem('c:GkK?_5eVdQdiQT0Fb?', parsed['code']);
