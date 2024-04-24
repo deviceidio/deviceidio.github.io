@@ -209,7 +209,7 @@ function detectIncognito() {
     const url = 'https://api.deviceid.io';
     var loaded = '';
     var key;
-    var iv = await sha512('c7VEVapazCwNVcWgi1Ej').substring(0, 16);
+    var iv;
     var old = null;
     var cookieStored = null;
     var stored_id = '';
@@ -1468,7 +1468,9 @@ const resolution = window.screen.width+"x"+window.screen.height;
          stored_id = makeid(20);
          localStorage.setItem('deviceID_identifier', stored_id);
      }
- 
+     sha512('c7VEVapazCwNVcWgi1Ej').then((val) => {
+        iv = val.substring(0, 16);
+     });
      return new Promise(async (resolve, reject) => {
         if (typeof data === 'object') {
          if (!("apiKey" in data)) {
