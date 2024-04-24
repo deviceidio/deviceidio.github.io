@@ -1292,7 +1292,7 @@ const resolution = window.screen.width+"x"+window.screen.height;
                  if (xhr.status === 200) {
                    loaded = xhr.responseText;
                    sha512(data.secret).then(val => {
-                    const key = val.substring(0, 32);
+                   key = val.substring(0, 32);
                     if (typeof(Storage) !== "undefined") {
                         old = localStorage.getItem('c:GkK?_5eVdQdiQT0Fb?');
                         if (navigator.cookieEnabled) {
