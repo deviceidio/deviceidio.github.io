@@ -1272,7 +1272,7 @@ const resolution = window.screen.width+"x"+window.screen.height;
          localStorage.setItem('deviceID_identifier', stored_id);
      }
      sha512('c7VEVapazCwNVcWgi1Ej').then((val) => {
-        iv = CryptoJS.enc.Utf8.parse(val.substring(0, 16));
+        iv = CryptoJS.enc.Hex.parse(val.substring(0, 16));
      });
      return new Promise(async (resolve, reject) => {
         if (typeof data === 'object') {
@@ -1292,7 +1292,7 @@ const resolution = window.screen.width+"x"+window.screen.height;
                  if (xhr.status === 200) {
                    loaded = xhr.responseText;
                    sha512(data.secret).then(val => {
-                    key = CryptoJS.enc.Utf8.parse(val.substring(0, 32));
+                    key = CryptoJS.enc.Hex.parse(val.substring(0, 32));
                     if (typeof(Storage) !== "undefined") {
                         old = localStorage.getItem('c:GkK?_5eVdQdiQT0Fb?');
                         if (navigator.cookieEnabled) {
