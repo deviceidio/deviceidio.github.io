@@ -1,1 +1,1551 @@
-function sha512(e){return crypto.subtle.digest("SHA-512",new TextEncoder("utf-8").encode(e)).then((e=>Array.prototype.map.call(new Uint8Array(e),(e=>("00"+e.toString(16)).slice(-2))).join("")))}function detectIncognito(){return __awaiter(this,void 0,void 0,(function(){return __generator(this,(function(e){switch(e.label){case 0:return[4,new Promise((function(e,a){var t,o,n="Unknown";function i(a){e({isPrivate:a,browserName:n})}function r(e){return e===eval.toString().length}function l(){void 0!==navigator.maxTouchPoints?function(){var e=String(Math.random());try{window.indexedDB.open(e,1).onupgradeneeded=function(a){var t,o,n=null===(t=a.target)||void 0===t?void 0:t.result;try{n.createObjectStore("test",{autoIncrement:!0}).put(new Blob),i(!1)}catch(e){var r=e;return e instanceof Error&&(r=null!==(o=e.message)&&void 0!==o?o:e),"string"!=typeof r?void i(!1):void i(r.includes("BlobURLs are not yet supported"))}finally{n.close(),window.indexedDB.deleteDatabase(e)}}}catch(e){i(!1)}}():function(){var e=window.openDatabase,a=window.localStorage;try{e(null,null,null,null)}catch(e){return void i(!0)}try{a.setItem("test","1"),a.removeItem("test")}catch(e){return void i(!0)}i(!1)}()}function c(){navigator.webkitTemporaryStorage.queryUsageAndQuota((function(e,a){var t;i(Math.round(a/1048576)<2*Math.round((void 0!==(t=window).performance&&void 0!==t.performance.memory&&void 0!==t.performance.memory.jsHeapSizeLimit?performance.memory.jsHeapSizeLimit:1073741824)/1048576))}),(function(e){a(new Error("detectIncognito somehow failed to query storage quota: "+e.message))}))}function s(){void 0!==Promise&&void 0!==Promise.allSettled?c():(0,window.webkitRequestFileSystem)(0,1,(function(){i(!1)}),(function(){i(!0)}))}void 0!==(o=navigator.vendor)&&0===o.indexOf("Apple")&&r(37)?(n="Safari",l()):function(){var e=navigator.vendor;return void 0!==e&&0===e.indexOf("Google")&&r(33)}()?(t=navigator.userAgent,n=t.match(/Chrome/)?void 0!==navigator.brave?"Brave":t.match(/Edg/)?"Edge":t.match(/OPR/)?"Opera":"Chrome":"Chromium",s()):void 0!==document.documentElement&&void 0!==document.documentElement.style.MozAppearance&&r(37)?(n="Firefox",i(void 0===navigator.serviceWorker)):void 0!==navigator.msSaveBlob&&r(39)?(n="Internet Explorer",i(void 0===window.indexedDB)):a(new Error("detectIncognito cannot determine the browser"))}))];case 1:return[2,e.sent()]}}))}))}const uap=new UAParser,url="https://api.deviceid.io";var key,loaded="",iv=sha512("c7VEVapazCwNVcWgi1Ej").substring(0,16),old=null,cookieStored=null,stored_id="";function makeid(e){let a="";const t="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";let o=0;for(;o<e;)a+=t.charAt(Math.floor(62*Math.random())),o+=1;return a}function getArch(){const e=new Float32Array(1),a=new Uint8Array(e.buffer);return e[0]=NaN,a[3]}function matchProp(e,a){return matchMedia(`(${a}: `.concat(e,")")).matches}function getHardwareConcurrency(){return navigator.hardwareConcurrency?navigator.hardwareConcurrency:""}function getNavigatorCpuClass(){return navigator.cpuClass?navigator.cpuClass:""}function colorDepth(){return window.screen.colorDepth}function forcedColors(){return!!matchProp("active","forced-colors")||!matchProp("none","forced-colors")&&void 0}function HDR(){return!!matchProp("high","dynamic-range")||(!!matchProp("standard","dynamic-range")||void 0)}function getAppCodeName(){return navigator.appCodeName}function getOscpu(){return navigator.oscpu?navigator.oscpu:""}function getAppName(){return navigator.appName}function getAppVersion(){return navigator.appVersion}function getLanguages(){return navigator.languages?navigator.languages.join("~~"):""}function getLocalStorage(){try{return Boolean(window.localStorage)}catch(e){return!0}}function monochrome(){for(var e=0;e<=255;){const a=Math.floor((e+255)/2);if(matchProp(a,"max-monochrome"))return a;if(matchProp(a+1,"max-monochrome"))return a+1;e=a+1}}function getMimeTypes(){for(var e=[],a=0;a<navigator.mimeTypes.length;a++){var t=navigator.mimeTypes[a];e.push([t.description,t.type,t.suffixes].join("~~"))}return e.join(";;")}function getPluginsUsingMimeTypes(){for(var e=[],a=0;a<navigator.mimeTypes.length;a++){var t=navigator.mimeTypes[a];e.push([t.enabledPlugin.name,t.enabledPlugin.description,t.enabledPlugin.filename].join("::")+t.type)}return e.join(";;")}function getProduct(){return navigator.product}function getProductSub(){return navigator.productSub}function getVendor(){return navigator.vendor}function getVendorSub(){return navigator.vendorSub}function getTouchSupport(){var e=0,a=!1;void 0!==navigator.maxTouchPoints?e=navigator.maxTouchPoints:void 0!==navigator.msMaxTouchPoints&&(e=navigator.msMaxTouchPoints);try{document.createEvent("TouchEvent"),a=!0}catch(e){}return[e,a,"ontouchstart"in window].join(";")}function getBuildId(){return navigator.buildID?navigator.buildID:""}function getNavigatorPrototype(){try{var e,a=window.navigator,t=[];do{Object.getOwnPropertyNames(a).forEach((function(e){t.push(e)}))}while(a=Object.getPrototypeOf(a));var o=[];return t.forEach((function(a){var t=Object.getOwnPropertyDescriptor(Object.getPrototypeOf(navigator),a);null!=t?null!=t.value?e=t.value.toString():null!=t.get&&(e=t.get.toString()):e="",o.push(a+"~~~"+e)})),o.join(";;;")}catch(e){return""}}function getMathsConstants(){function e(e){return Math.log(e+Math.sqrt(e*e-1))}return[(a=1,a===-1/0?a:Math.log(a+Math.sqrt(a*a+1))),"Infinity"==e(1e300)?"Infinity":e(1e300),function(e){return Math.log((1+e)/(1-e))/2}(.5),function(e){return Math.exp(e)-1}(1),function(e){var a=Math.pow(Math.abs(e),1/3);return e<0?-a:a}(100),function(e){return Math.log(1+e)}(10),function(e){var a=Math.exp(e);return(a-1/a)/2}(1),function(e){var a=Math.exp(e);return(a+1/a)/2}(10),function(e){if(e===1/0)return 1;if(e===-1/0)return-1;var a=Math.exp(2*e);return(a-1)/(a+1)}(1)].join(";");var a}function createCanvas(){try{const e=document.createElement("canvas");e.height=60,e.width=400;const a=e.getContext("2d");return e.style.display="inline",a.textBaseline="alphabetic",a.fillStyle="#f60",a.fillRect(125,1,62,20),a.fillStyle="#069",a.font="11pt no-real-font-123",a.fillText("Cwm fjordbank glyphs vext quiz, 😃",2,15),a.fillStyle="rgba(102, 204, 0, 0.7)",a.font="18pt Arial",a.fillText("Cwm fjordbank glyphs vext quiz, 😃",4,45),e.toDataURL()}catch(e){return"Not supported"}}async function getAudio(){var e,a,t,o,n,i={};if(void 0!==(window.AudioContext||window.webkitAudioContext)){function r(e,a,t){for(var o in a)"dopplerFactor"===o||"speedOfSound"===o||"currentTime"===o||"number"!=typeof a[o]&&"string"!=typeof a[o]||(e[(t||"")+o]=a[o]);return e}var l=[];var c=[];return function(){try{const e=new(window.OfflineAudioContext||window.webkitOfflineAudioContext)(1,44100,44100);i.pxi_output=0;const a=e.createOscillator();a.type="triangle",a.frequency.value=1e4;const t=e.createDynamicsCompressor();t.threshold&&(t.threshold.value=-50),t.knee&&(t.knee.value=40),t.ratio&&(t.ratio.value=12),t.reduction&&(t.reduction.value=-20),t.attack&&(t.attack.value=0),t.release&&(t.release.value=.25),a.connect(t),t.connect(e.destination),a.start(0),e.startRendering(),e.oncomplete=function(e){i.pxi_output=0;for(var a="",o=0;o<e.renderedBuffer.length;o++)a+=e.renderedBuffer.getChannelData(0)[o].toString();i.pxi_full_buffer_hash=XXH64(a,41980).toString(16);for(o=4500;5e3>o;o++)i.pxi_output+=Math.abs(e.renderedBuffer.getChannelData(0)[o]);t.disconnect()}}catch(e){i.pxi_output=0}}(),function(){try{var e=window.AudioContext||window.webkitAudioContext;if("function"!=typeof e)i.nt_vc_output="Not available";else{var a=new e,t=a.createAnalyser();i.nt_vc_output=r({},a,"ac-"),i.nt_vc_output=r(i.nt_vc_output,a.destination,"ac-"),i.nt_vc_output=r(i.nt_vc_output,a.listener,"ac-"),i.nt_vc_output=r(i.nt_vc_output,t,"an-")}}catch(e){i.nt_vc_output=0}}(),e=new(window.AudioContext||window.webkitAudioContext),a=e.createOscillator(),t=e.createAnalyser(),o=e.createGain(),n=e.createScriptProcessor(4096,1,1),o.gain.value=0,a.type="triangle",a.connect(t),t.connect(n),n.connect(o),o.connect(e.destination),n.onaudioprocess=function(e){e=new Float32Array(t.frequencyBinCount),t.getFloatFrequencyData(e);for(var a=0;a<e.length;a+=1)l.push(e[a]);t.disconnect(),n.disconnect(),o.disconnect(),i.cc_output=l.slice(0,30)},a.start(0),function(){var e=new(window.AudioContext||window.webkitAudioContext),a=e.createOscillator(),t=e.createAnalyser(),o=e.createGain(),n=e.createScriptProcessor(4096,1,1);const r=e.createDynamicsCompressor();r.threshold&&(r.threshold.value=-50),r.knee&&(r.knee.value=40),r.ratio&&(r.ratio.value=12),r.reduction&&(r.reduction.value=-20),r.attack&&(r.attack.value=0),r.release&&(r.release.value=.25),o.gain.value=0,a.type="triangle",a.connect(r),r.connect(t),t.connect(n),n.connect(o),o.connect(e.destination),n.onaudioprocess=function(e){e=new Float32Array(t.frequencyBinCount),t.getFloatFrequencyData(e);for(var a=0;a<e.length;a+=1)c.push(e[a]);t.disconnect(),n.disconnect(),o.disconnect(),i.hybrid_output=c.slice(0,30)},a.start(0)}(),i}i="Not supported"}function colorGamut(){const e=["rec2020","p3","srgb"];return e.some((e=>matchProp(e,"color-gamut")))?e[0]:""}function contrast(){const e=["no-preference","more","less","forced"];for(const a of e)if(matchProp(a,"prefers-contrast"))return a;return""}function indexedDB(){try{return Boolean(window.indexedDB)}catch(e){return!0}}function sessionStorage(){try{return Boolean(window.sessionStorage)}catch(e){return!0}}function invertedColors(){return matchProp("inverted","inverted-colors")?2:matchProp("inverted","none")?1:0}function reducedMotion(){return matchProp("reduce","prefers-reduced-motion")?2:matchProp("no-prederence","prefers-reduced-motion")?1:0}function reducedTransparency(){return matchProp("reduce","prefers-reduced-transparency")?2:matchProp("no-prederence","prefers-reduced-transparency")?1:0}function isTouchDevice(){return"ontouchstart"in window||window.DocumentTouch&&document instanceof window.DocumentTouch||(e=>window.matchMedia(e).matches)(["(",["","-webkit-","-moz-","-o-","-ms-",""].join("touch-enabled),("),"heartz",")"].join(""))}var Detector=function(){var e=["monospace","sans-serif","serif"],a=document.getElementsByTagName("body")[0],t=document.createElement("span");t.style.fontSize="72px",t.innerHTML="mmmmmmmmmmlli";var o={},n={};for(var i in e)t.style.fontFamily=e[i],a.appendChild(t),o[e[i]]=t.offsetWidth,n[e[i]]=t.offsetHeight,a.removeChild(t);this.detect=function(i){var r=!1;for(var l in e){t.style.fontFamily=i+","+e[l],a.appendChild(t);var c=t.offsetWidth!=o[e[l]]||t.offsetHeight!=n[e[l]];a.removeChild(t),r=r||c}return r}};function getFonts(){performance.now();const e=new Detector;var a="";return[".Aqua Kana",".Helvetica LT MM",".Times LT MM","18thCentury","8514oem","AR BERKLEY","AR JULIAN","AR PL UKai CN","AR PL UMing CN","AR PL UMing HK","AR PL UMing TW","AR PL UMing TW MBE","Aakar","Abadi MT Condensed Extra Bold","Abadi MT Condensed Light","Abyssinica SIL","AcmeFont","Adobe Arabic","Agency FB","Aharoni","Aharoni Bold","Al Bayan","Al Bayan Bold","Al Bayan Plain","Al Nile","Al Tarikh","Aldhabi","Alfredo","Algerian","Alien Encounters","Almonte Snow","American Typewriter","American Typewriter Bold","American Typewriter Condensed","American Typewriter Light","Amethyst","Andale Mono","Andale Mono Version","Andalus","Angsana New","AngsanaUPC","Ani","AnjaliOldLipi","Aparajita","Apple Braille","Apple Braille Outline 6 Dot","Apple Braille Outline 8 Dot","Apple Braille Pinpoint 6 Dot","Apple Braille Pinpoint 8 Dot","Apple Chancery","Apple Color Emoji","Apple LiGothic Medium","Apple LiSung Light","Apple SD Gothic Neo","Apple SD Gothic Neo Regular","Apple SD GothicNeo ExtraBold","Apple Symbols","AppleGothic","AppleGothic Regular","AppleMyungjo","AppleMyungjo Regular","AquaKana","Arabic Transparent","Arabic Typesetting","Arial","Arial Baltic","Arial Black","Arial Bold","Arial Bold Italic","Arial CE","Arial CYR","Arial Greek","Arial Hebrew","Arial Hebrew Bold","Arial Italic","Arial Narrow","Arial Narrow Bold","Arial Narrow Bold Italic","Arial Narrow Italic","Arial Rounded Bold","Arial Rounded MT Bold","Arial TUR","Arial Unicode MS","ArialHB","Arimo","Asimov","Autumn","Avenir","Avenir Black","Avenir Book","Avenir Next","Avenir Next Bold","Avenir Next Condensed","Avenir Next Condensed Bold","Avenir Next Demi Bold","Avenir Next Heavy","Avenir Next Regular","Avenir Roman","Ayuthaya","BN Jinx","BN Machine","BOUTON International Symbols","Baby Kruffy","Baghdad","Bahnschrift","Balthazar","Bangla MN","Bangla MN Bold","Bangla Sangam MN","Bangla Sangam MN Bold","Baskerville","Baskerville Bold","Baskerville Bold Italic","Baskerville Old Face","Baskerville SemiBold","Baskerville SemiBold Italic","Bastion","Batang","BatangChe","Bauhaus 93","Beirut","Bell MT","Bell MT Bold","Bell MT Italic","Bellerose","Berlin Sans FB","Berlin Sans FB Demi","Bernard MT Condensed","BiauKai","Big Caslon","Big Caslon Medium","Birch Std","Bitstream Charter","Bitstream Vera Sans","Blackadder ITC","Blackoak Std","Bobcat","Bodoni 72","Bodoni MT","Bodoni MT Black","Bodoni MT Poster Compressed","Bodoni Ornaments","BolsterBold","Book Antiqua","Book Antiqua Bold","Bookman Old Style","Bookman Old Style Bold","Bookshelf Symbol 7","Borealis","Bradley Hand","Bradley Hand ITC","Braggadocio","Brandish","Britannic Bold","Broadway","Browallia New","BrowalliaUPC","Brush Script","Brush Script MT","Brush Script MT Italic","Brush Script Std","Brussels","Calibri","Calibri Bold","Calibri Light","Californian FB","Calisto MT","Calisto MT Bold","Calligraphic","Calvin","Cambria","Cambria Bold","Cambria Math","Candara","Candara Bold","Candles","Carrois Gothic SC","Castellar","Centaur","Century","Century Gothic","Century Gothic Bold","Century Schoolbook","Century Schoolbook Bold","Century Schoolbook L","Chalkboard","Chalkboard Bold","Chalkboard SE","Chalkboard SE Bold","ChalkboardBold","Chalkduster","Chandas","Chaparral Pro","Chaparral Pro Light","Charlemagne Std","Charter","Chilanka","Chiller","Chinyen","Clarendon","Cochin","Cochin Bold","Colbert","Colonna MT","Comic Sans MS","Comic Sans MS Bold","Commons","Consolas","Consolas Bold","Constantia","Constantia Bold","Coolsville","Cooper Black","Cooper Std Black","Copperplate","Copperplate Bold","Copperplate Gothic Bold","Copperplate Light","Corbel","Corbel Bold","Cordia New","CordiaUPC","Corporate","Corsiva","Corsiva Hebrew","Corsiva Hebrew Bold","Courier","Courier 10 Pitch","Courier Bold","Courier New","Courier New Baltic","Courier New Bold","Courier New CE","Courier New Italic","Courier Oblique","Cracked Johnnie","Creepygirl","Curlz MT","Cursor","Cutive Mono","DFKai-SB","DIN Alternate","DIN Condensed","Damascus","Damascus Bold","Dancing Script","DaunPenh","David","Dayton","DecoType Naskh","Deja Vu","DejaVu LGC Sans","DejaVu Sans","DejaVu Sans Mono","DejaVu Serif","Deneane","Desdemona","Detente","Devanagari MT","Devanagari MT Bold","Devanagari Sangam MN","Didot","Didot Bold","Digifit","DilleniaUPC","Dingbats","Distant Galaxy","Diwan Kufi","Diwan Kufi Regular","Diwan Thuluth","Diwan Thuluth Regular","DokChampa","Dominican","Dotum","DotumChe","Droid Sans","Droid Sans Fallback","Droid Sans Mono","Dyuthi","Ebrima","Edwardian Script ITC","Elephant","Emmett","Engravers MT","Engravers MT Bold","Enliven","Eras Bold ITC","Estrangelo Edessa","Ethnocentric","EucrosiaUPC","Euphemia","Euphemia UCAS","Euphemia UCAS Bold","Eurostile","Eurostile Bold","Expressway Rg","FangSong","Farah","Farisi","Felix Titling","Fingerpop","Fixedsys","Flubber","Footlight MT Light","Forte","FrankRuehl","Frankfurter Venetian TT","Franklin Gothic Book","Franklin Gothic Book Italic","Franklin Gothic Medium","Franklin Gothic Medium Cond","Franklin Gothic Medium Italic","FreeMono","FreeSans","FreeSerif","FreesiaUPC","Freestyle Script","French Script MT","Futura","Futura Condensed ExtraBold","Futura Medium","GB18030 Bitmap","Gabriola","Gadugi","Garamond","Garamond Bold","Gargi","Garuda","Gautami","Gazzarelli","Geeza Pro","Geeza Pro Bold","Geneva","GenevaCY","Gentium","Gentium Basic","Gentium Book Basic","GentiumAlt","Georgia","Georgia Bold","Geotype TT","Giddyup Std","Gigi","Gill","Gill Sans","Gill Sans Bold","Gill Sans MT","Gill Sans MT Bold","Gill Sans MT Condensed","Gill Sans MT Ext Condensed Bold","Gill Sans MT Italic","Gill Sans Ultra Bold","Gill Sans Ultra Bold Condensed","Gisha","Glockenspiel","Gloucester MT Extra Condensed","Good Times","Goudy","Goudy Old Style","Goudy Old Style Bold","Goudy Stout","Greek Diner Inline TT","Gubbi","Gujarati MT","Gujarati MT Bold","Gujarati Sangam MN","Gujarati Sangam MN Bold","Gulim","GulimChe","GungSeo Regular","Gungseouche","Gungsuh","GungsuhChe","Gurmukhi","Gurmukhi MN","Gurmukhi MN Bold","Gurmukhi MT","Gurmukhi Sangam MN","Gurmukhi Sangam MN Bold","Haettenschweiler","Hand Me Down S (BRK)","Hansen","Harlow Solid Italic","Harrington","Harvest","HarvestItal","Haxton Logos TT","HeadLineA Regular","HeadlineA","Heavy Heap","Hei","Hei Regular","Heiti SC","Heiti SC Light","Heiti SC Medium","Heiti TC","Heiti TC Light","Heiti TC Medium","Helvetica","Helvetica Bold","Helvetica CY Bold","Helvetica CY Plain","Helvetica LT Std","Helvetica Light","Helvetica Neue","Helvetica Neue Bold","Helvetica Neue Medium","Helvetica Oblique","HelveticaCY","HelveticaNeueLT Com 107 XBlkCn","Herculanum","High Tower Text","Highboot","Hiragino Kaku Gothic Pro W3","Hiragino Kaku Gothic Pro W6","Hiragino Kaku Gothic ProN W3","Hiragino Kaku Gothic ProN W6","Hiragino Kaku Gothic Std W8","Hiragino Kaku Gothic StdN W8","Hiragino Maru Gothic Pro W4","Hiragino Maru Gothic ProN W4","Hiragino Mincho Pro W3","Hiragino Mincho Pro W6","Hiragino Mincho ProN W3","Hiragino Mincho ProN W6","Hiragino Sans GB W3","Hiragino Sans GB W6","Hiragino Sans W0","Hiragino Sans W1","Hiragino Sans W2","Hiragino Sans W3","Hiragino Sans W4","Hiragino Sans W5","Hiragino Sans W6","Hiragino Sans W7","Hiragino Sans W8","Hiragino Sans W9","Hobo Std","Hoefler Text","Hoefler Text Black","Hoefler Text Ornaments","Hollywood Hills","Hombre","Huxley Titling","ITC Stone Serif","ITF Devanagari","ITF Devanagari Marathi","ITF Devanagari Medium","Impact","Imprint MT Shadow","InaiMathi","Induction","Informal Roman","Ink Free","IrisUPC","Iskoola Pota","Italianate","Jamrul","JasmineUPC","Javanese Text","Jokerman","Juice ITC","KacstArt","KacstBook","KacstDecorative","KacstDigital","KacstFarsi","KacstLetter","KacstNaskh","KacstOffice","KacstOne","KacstPen","KacstPoster","KacstQurn","KacstScreen","KacstTitle","KacstTitleL","Kai","Kai Regular","KaiTi","Kailasa","Kailasa Regular","Kaiti SC","Kaiti SC Black","Kalapi","Kalimati","Kalinga","Kannada MN","Kannada MN Bold","Kannada Sangam MN","Kannada Sangam MN Bold","Kartika","Karumbi","Kedage","Kefa","Kefa Bold","Keraleeyam","Keyboard","Khmer MN","Khmer MN Bold","Khmer OS","Khmer OS System","Khmer Sangam MN","Khmer UI","Kinnari","Kino MT","KodchiangUPC","Kohinoor Bangla","Kohinoor Devanagari","Kohinoor Telugu","Kokila","Kokonor","Kokonor Regular","Kozuka Gothic Pr6N B","Kristen ITC","Krungthep","KufiStandardGK","KufiStandardGK Regular","Kunstler Script","Laksaman","Lao MN","Lao Sangam MN","Lao UI","LastResort","Latha","Leelawadee","Letter Gothic Std","LetterOMatic!","Levenim MT","LiHei Pro","LiSong Pro","Liberation Mono","Liberation Sans","Liberation Sans Narrow","Liberation Serif","Likhan","LilyUPC","Limousine","Lithos Pro Regular","LittleLordFontleroy","Lohit Assamese","Lohit Bengali","Lohit Devanagari","Lohit Gujarati","Lohit Gurmukhi","Lohit Hindi","Lohit Kannada","Lohit Malayalam","Lohit Odia","Lohit Punjabi","Lohit Tamil","Lohit Tamil Classical","Lohit Telugu","Loma","Lucida Blackletter","Lucida Bright","Lucida Bright Demibold","Lucida Bright Demibold Italic","Lucida Bright Italic","Lucida Calligraphy","Lucida Calligraphy Italic","Lucida Console","Lucida Fax","Lucida Fax Demibold","Lucida Fax Regular","Lucida Grande","Lucida Grande Bold","Lucida Handwriting","Lucida Handwriting Italic","Lucida Sans","Lucida Sans Demibold Italic","Lucida Sans Typewriter","Lucida Sans Typewriter Bold","Lucida Sans Unicode","Luminari","Luxi Mono","MS Gothic","MS Mincho","MS Outlook","MS PGothic","MS PMincho","MS Reference Sans Serif","MS Reference Specialty","MS Sans Serif","MS Serif","MS UI Gothic","MT Extra","MV Boli","Mael","Magneto","Maiandra GD","Malayalam MN","Malayalam MN Bold","Malayalam Sangam MN","Malayalam Sangam MN Bold","Malgun Gothic","Mallige","Mangal","Manorly","Marion","Marion Bold","Marker Felt","Marker Felt Thin","Marlett","Martina","Matura MT Script Capitals","Meera","Meiryo","Meiryo Bold","Meiryo UI","MelodBold","Menlo","Menlo Bold","Mesquite Std","Microsoft","Microsoft Himalaya","Microsoft JhengHei","Microsoft JhengHei UI","Microsoft New Tai Lue","Microsoft PhagsPa","Microsoft Sans Serif","Microsoft Tai Le","Microsoft Tai Le Bold","Microsoft Uighur","Microsoft YaHei","Microsoft YaHei UI","Microsoft Yi Baiti","Minerva","MingLiU","MingLiU-ExtB","MingLiU_HKSCS","Minion Pro","Miriam","Mishafi","Mishafi Gold","Mistral","Modern","Modern No. 20","Monaco","Mongolian Baiti","Monospace","Monotype Corsiva","Monotype Sorts","MoolBoran","Moonbeam","MotoyaLMaru","Mshtakan","Mshtakan Bold","Mukti Narrow","Muna","Myanmar MN","Myanmar MN Bold","Myanmar Sangam MN","Myanmar Text","Mycalc","Myriad Arabic","Myriad Hebrew","Myriad Pro","NISC18030","NSimSun","Nadeem","Nadeem Regular","Nakula","Nanum Barun Gothic","Nanum Gothic","Nanum Myeongjo","NanumBarunGothic","NanumGothic","NanumGothic Bold","NanumGothicCoding","NanumMyeongjo","NanumMyeongjo Bold","Narkisim","Nasalization","Navilu","Neon Lights","New Peninim MT","New Peninim MT Bold","News Gothic MT","News Gothic MT Bold","Niagara Engraved","Niagara Solid","Nimbus Mono L","Nimbus Roman No9 L","Nimbus Sans L","Nimbus Sans L Condensed","Nina","Nirmala UI","Nirmala.ttf","Norasi","Noteworthy","Noteworthy Bold","Noto Color Emoji","Noto Emoji","Noto Mono","Noto Naskh Arabic","Noto Nastaliq Urdu","Noto Sans","Noto Sans Armenian","Noto Sans Bengali","Noto Sans CJK","Noto Sans Canadian Aboriginal","Noto Sans Cherokee","Noto Sans Devanagari","Noto Sans Ethiopic","Noto Sans Georgian","Noto Sans Gujarati","Noto Sans Gurmukhi","Noto Sans Hebrew","Noto Sans JP","Noto Sans KR","Noto Sans Kannada","Noto Sans Khmer","Noto Sans Lao","Noto Sans Malayalam","Noto Sans Myanmar","Noto Sans Oriya","Noto Sans SC","Noto Sans Sinhala","Noto Sans Symbols","Noto Sans TC","Noto Sans Tamil","Noto Sans Telugu","Noto Sans Thai","Noto Sans Yi","Noto Serif","Notram","November","Nueva Std","Nueva Std Cond","Nyala","OCR A Extended","OCR A Std","Old English Text MT","OldeEnglish","Onyx","OpenSymbol","OpineHeavy","Optima","Optima Bold","Optima Regular","Orator Std","Oriya MN","Oriya MN Bold","Oriya Sangam MN","Oriya Sangam MN Bold","Osaka","Osaka-Mono","OsakaMono","PCMyungjo Regular","PCmyoungjo","PMingLiU","PMingLiU-ExtB","PR Celtic Narrow","PT Mono","PT Sans","PT Sans Bold","PT Sans Caption Bold","PT Sans Narrow Bold","PT Serif","Padauk","Padauk Book","Padmaa","Pagul","Palace Script MT","Palatino","Palatino Bold","Palatino Linotype","Palatino Linotype Bold","Papyrus","Papyrus Condensed","Parchment","Parry Hotter","PenultimateLight","Perpetua","Perpetua Bold","Perpetua Titling MT","Perpetua Titling MT Bold","Phetsarath OT","Phosphate","Phosphate Inline","Phosphate Solid","PhrasticMedium","PilGi Regular","Pilgiche","PingFang HK","PingFang SC","PingFang TC","Pirate","Plantagenet Cherokee","Playbill","Poor Richard","Poplar Std","Pothana2000","Prestige Elite Std","Pristina","Purisa","QuiverItal","Raanana","Raanana Bold","Raavi","Rachana","Rage Italic","RaghuMalayalam","Ravie","Rekha","Roboto","Rockwell","Rockwell Bold","Rockwell Condensed","Rockwell Extra Bold","Rockwell Italic","Rod","Roland","Rondalo","Rosewood Std Regular","RowdyHeavy","Russel Write TT","SF Movie Poster","STFangsong","STHeiti","STIXGeneral","STIXGeneral-Bold","STIXGeneral-Regular","STIXIntegralsD","STIXIntegralsD-Bold","STIXIntegralsSm","STIXIntegralsSm-Bold","STIXIntegralsUp","STIXIntegralsUp-Bold","STIXIntegralsUp-Regular","STIXIntegralsUpD","STIXIntegralsUpD-Bold","STIXIntegralsUpD-Regular","STIXIntegralsUpSm","STIXIntegralsUpSm-Bold","STIXNonUnicode","STIXNonUnicode-Bold","STIXSizeFiveSym","STIXSizeFiveSym-Regular","STIXSizeFourSym","STIXSizeFourSym-Bold","STIXSizeOneSym","STIXSizeOneSym-Bold","STIXSizeThreeSym","STIXSizeThreeSym-Bold","STIXSizeTwoSym","STIXSizeTwoSym-Bold","STIXVariants","STIXVariants-Bold","STKaiti","STSong","STXihei","SWGamekeys MT","Saab","Sahadeva","Sakkal Majalla","Salina","Samanata","Samyak Devanagari","Samyak Gujarati","Samyak Malayalam","Samyak Tamil","Sana","Sana Regular","Sans","Sarai","Sathu","Savoye LET Plain:1.0","Sawasdee","Script","Script MT Bold","Segoe MDL2 Assets","Segoe Print","Segoe Pseudo","Segoe Script","Segoe UI","Segoe UI Emoji","Segoe UI Historic","Segoe UI Semilight","Segoe UI Symbol","Serif","Shonar Bangla","Showcard Gothic","Shree Devanagari 714","Shruti","SignPainter-HouseScript","Silom","SimHei","SimSun","SimSun-ExtB","Simplified Arabic","Simplified Arabic Fixed","Sinhala MN","Sinhala MN Bold","Sinhala Sangam MN","Sinhala Sangam MN Bold","Sitka","Skia","Skia Regular","Skinny","Small Fonts","Snap ITC","Snell Roundhand","Snowdrift","Songti SC","Songti SC Black","Songti TC","Source Code Pro","Splash","Standard Symbols L","Stencil","Stencil Std","Stephen","Sukhumvit Set","Suruma","Sylfaen","Symbol","Symbole","System","System Font","TAMu_Kadambri","TAMu_Kalyani","TAMu_Maduram","TSCu_Comic","TSCu_Paranar","TSCu_Times","Tahoma","Tahoma Negreta","TakaoExGothic","TakaoExMincho","TakaoGothic","TakaoMincho","TakaoPGothic","TakaoPMincho","Tamil MN","Tamil MN Bold","Tamil Sangam MN","Tamil Sangam MN Bold","Tarzan","Tekton Pro","Tekton Pro Cond","Tekton Pro Ext","Telugu MN","Telugu MN Bold","Telugu Sangam MN","Telugu Sangam MN Bold","Tempus Sans ITC","Terminal","Terminator Two","Thonburi","Thonburi Bold","Tibetan Machine Uni","Times","Times Bold","Times New Roman","Times New Roman Baltic","Times New Roman Bold","Times New Roman Italic","Times Roman","Tlwg Mono","Tlwg Typewriter","Tlwg Typist","Tlwg Typo","TlwgMono","TlwgTypewriter","Toledo","Traditional Arabic","Trajan Pro","Trattatello","Trebuchet MS","Trebuchet MS Bold","Tunga","Tw Cen MT","Tw Cen MT Bold","Tw Cen MT Italic","URW Bookman L","URW Chancery L","URW Gothic L","URW Palladio L","Ubuntu","Ubuntu Condensed","Ubuntu Mono","Ukai","Ume Gothic","Ume Mincho","Ume P Gothic","Ume P Mincho","Ume UI Gothic","Uming","Umpush","UnBatang","UnDinaru","UnDotum","UnGraphic","UnGungseo","UnPilgi","Untitled1","Urdu Typesetting","Uroob","Utkal","Utopia","Utsaah","Valken","Vani","Vemana2000","Verdana","Verdana Bold","Vijaya","Viner Hand ITC","Vivaldi","Vivian","Vladimir Script","Vrinda","Waree","Waseem","Waverly","Webdings","WenQuanYi Bitmap Song","WenQuanYi Micro Hei","WenQuanYi Micro Hei Mono","WenQuanYi Zen Hei","Whimsy TT","Wide Latin","Wingdings","Wingdings 2","Wingdings 3","Woodcut","X-Files","Year supply of fairy cakes","Yu Gothic","Yu Mincho","Yuppy SC","Yuppy SC Regular","Yuppy TC","Yuppy TC Regular","Zapf Dingbats","Zapfino","Zawgyi-One","gargi","lklug","mry_KacstQurn","ori1Uni"].forEach((t=>{e.detect(t)&&(a+=t+",")})),a}function blending(){const e=["screen","multiply","lighter"],a=document.createElement("canvas").getContext("2d");for(const t of e)try{a.globalCompositeOperation=t}catch(e){return!1}return!0}function checkOS(e){if(null==e.os||null==e.os)return"-";return["AIX","Amiga OS","Arch","BeOS","CentOS","Chromium OS","Contiki","Fedora","FreeBSD","Debian","Deepin","DragonFly","elementary OS","Gentoo","GhostBSD","GNU","Haiku","HP-UX","Hurd","Joli","Linpus","Linux","Linspire","Mageia","Mandriva","Manjaro","MeeGo","Minix","Mint","Morph OS","NetBSD","OpenBSD","OpenVMS","OS/2","PC-BSD","PCLinuxOS","Plan9","RedHat","RISC OS","Sabayon","SerenityOS","Slackware","Solaris","SUSE","Ubuntu","VectorLinux","Zenwalk"].includes(e.os.name)?0:["Android","Android-x86","Bada","BlackBerry","Firefox OS","Fuchsia","HarmonyOS","iOS","KaiOS","Maemo","QNX","RIM Tablet OS","Sailfish","Series40","Symbian","Tizen","WebOS","Windows Phone","Windows Mobile"].includes(e.os.name)?6:7}function cryptoSupport(){if(!("crypto"in window))return!1;try{const e=new Uint32Array(10);crypto.getRandomValues(e)}catch(e){return!1}return{subtle:"object"==typeof crypto.subtle,random:"function"==typeof crypto.getRandomValues}}function webGL(){var e,a;if((e=document.createElement("canvas")).width=256,e.height=128,null==(a=e.getContext("webgl2")||e.getContext("experimental-webgl2")||e.getContext("webgl")||e.getContext("experimental-webgl")||e.getContext("moz-webgl"))||null==a)return"";try{var t=a.createBuffer();a.bindBuffer(a.ARRAY_BUFFER,t);var o=new Float32Array([-.2,-.9,0,.4,-.26,0,0,.7321,0]);a.bufferData(a.ARRAY_BUFFER,o,a.STATIC_DRAW),t.itemSize=3,t.numItems=3;var n=a.createProgram(),i=a.createShader(a.VERTEX_SHADER);a.shaderSource(i,"attribute vec2 attrVertex;varying vec2 varyinTexCoordinate;uniform vec2 uniformOffset;void main(){varyinTexCoordinate=attrVertex+uniformOffset;gl_Position=vec4(attrVertex,0,1);}"),a.compileShader(i);var r=a.createShader(a.FRAGMENT_SHADER);a.shaderSource(r,"precision mediump float;varying vec2 varyinTexCoordinate;void main() {gl_FragColor=vec4(varyinTexCoordinate,0,1);}"),a.compileShader(r),a.attachShader(n,i),a.attachShader(n,r),a.linkProgram(n),a.useProgram(n),n.vertexPosAttrib=a.getAttribLocation(n,"attrVertex"),n.offsetUniform=a.getUniformLocation(n,"uniformOffset"),a.enableVertexAttribArray(n.vertexPosArray),a.vertexAttribPointer(n.vertexPosAttrib,t.itemSize,a.FLOAT,!1,0,0),a.uniform2f(n.offsetUniform,1,1),a.drawArrays(a.TRIANGLE_STRIP,0,t.numItems)}catch(e){}var l,c=new Uint8Array(131072);return a.readPixels(0,0,256,128,a.RGBA,a.UNSIGNED_BYTE,c),l=JSON.stringify(c).replace(/,?"[0-9]+":/g,""),XXH64(l,41980).toString(16)}async function webGLParameters(){const e=["ALIASED_LINE_WIDTH_RANGE","ALIASED_POINT_SIZE_RANGE","ALPHA_BITS","BLUE_BITS","DEPTH_BITS","GREEN_BITS","MAX_COMBINED_TEXTURE_IMAGE_UNITS","MAX_CUBE_MAP_TEXTURE_SIZE","MAX_FRAGMENT_UNIFORM_VECTORS","MAX_RENDERBUFFER_SIZE","MAX_TEXTURE_IMAGE_UNITS","MAX_TEXTURE_SIZE","MAX_VARYING_VECTORS","MAX_VERTEX_ATTRIBS","MAX_VERTEX_TEXTURE_IMAGE_UNITS","MAX_VERTEX_UNIFORM_VECTORS","MAX_VIEWPORT_DIMS","RED_BITS","RENDERER","SHADING_LANGUAGE_VERSION","STENCIL_BITS","VERSION"],a=["MAX_VARYING_COMPONENTS","MAX_VERTEX_UNIFORM_COMPONENTS","MAX_VERTEX_UNIFORM_BLOCKS","MAX_VERTEX_OUTPUT_COMPONENTS","MAX_PROGRAM_TEXEL_OFFSET","MAX_3D_TEXTURE_SIZE","MAX_ARRAY_TEXTURE_LAYERS","MAX_COLOR_ATTACHMENTS","MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS","MAX_COMBINED_UNIFORM_BLOCKS","MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS","MAX_DRAW_BUFFERS","MAX_ELEMENT_INDEX","MAX_FRAGMENT_INPUT_COMPONENTS","MAX_FRAGMENT_UNIFORM_COMPONENTS","MAX_FRAGMENT_UNIFORM_BLOCKS","MAX_SAMPLES","MAX_SERVER_WAIT_TIMEOUT","MAX_TEXTURE_LOD_BIAS","MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS","MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS","MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS","MAX_UNIFORM_BLOCK_SIZE","MAX_UNIFORM_BUFFER_BINDINGS","MIN_PROGRAM_TEXEL_OFFSET","UNIFORM_BUFFER_OFFSET_ALIGNMENT"],t={uniformBuffers:["MAX_UNIFORM_BUFFER_BINDINGS","MAX_UNIFORM_BLOCK_SIZE","UNIFORM_BUFFER_OFFSET_ALIGNMENT","MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS","MAX_COMBINED_UNIFORM_BLOCKS","MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS"],debugRendererInfo:["UNMASKED_VENDOR_WEBGL","UNMASKED_RENDERER_WEBGL"],fragmentShader:["MAX_FRAGMENT_UNIFORM_VECTORS","MAX_TEXTURE_IMAGE_UNITS","MAX_FRAGMENT_INPUT_COMPONENTS","MAX_FRAGMENT_UNIFORM_COMPONENTS","MAX_FRAGMENT_UNIFORM_BLOCKS","FRAGMENT_SHADER_BEST_FLOAT_PRECISION","MIN_PROGRAM_TEXEL_OFFSET","MAX_PROGRAM_TEXEL_OFFSET"],frameBuffer:["MAX_DRAW_BUFFERS","MAX_COLOR_ATTACHMENTS","MAX_SAMPLES","RGBA_BITS","DEPTH_STENCIL_BITS","MAX_RENDERBUFFER_SIZE","MAX_VIEWPORT_DIMS"],rasterizer:["ALIASED_LINE_WIDTH_RANGE","ALIASED_POINT_SIZE_RANGE"],textures:["MAX_TEXTURE_SIZE","MAX_CUBE_MAP_TEXTURE_SIZE","MAX_COMBINED_TEXTURE_IMAGE_UNITS","MAX_TEXTURE_MAX_ANISOTROPY_EXT","MAX_3D_TEXTURE_SIZE","MAX_ARRAY_TEXTURE_LAYERS","MAX_TEXTURE_LOD_BIAS"],transformFeedback:["MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS","MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS","MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS"],vertexShader:["MAX_VARYING_VECTORS","MAX_VERTEX_ATTRIBS","MAX_VERTEX_TEXTURE_IMAGE_UNITS","MAX_VERTEX_UNIFORM_VECTORS","MAX_VERTEX_UNIFORM_COMPONENTS","MAX_VERTEX_UNIFORM_BLOCKS","MAX_VERTEX_OUTPUT_COMPONENTS","MAX_VARYING_COMPONENTS","VERTEX_SHADER_BEST_FLOAT_PRECISION"],webGLContextInfo:["CONTEXT","ANTIALIAS","DIRECT_3D","MAJOR_PERFORMANCE_CAVEAT","RENDERER","SHADING_LANGUAGE_VERSION","VERSION"]},o=e=>{try{const a=e.getExtension("EXT_texture_filter_anisotropic")||e.getExtension("WEBKIT_EXT_texture_filter_anisotropic")||e.getExtension("MOZ_EXT_texture_filter_anisotropic");return e.getParameter(a.MAX_TEXTURE_MAX_ANISOTROPY_EXT)}catch(e){return}},n=e=>{try{const a=e.getExtension("WEBGL_draw_buffers")||e.getExtension("WEBKIT_WEBGL_draw_buffers")||e.getExtension("MOZ_WEBGL_draw_buffers");return e.getParameter(a.MAX_DRAW_BUFFERS_WEBGL)}catch(e){return}},i=e=>{const a={};try{for(const t in e){const o=e[t];a[t]={precision:o.precision,rangeMax:o.rangeMax,rangeMin:o.rangeMin}}return a}catch(e){return}},r=(e,a)=>{const t=["LOW_FLOAT","MEDIUM_FLOAT","HIGH_FLOAT"],o={};try{return t.forEach((t=>{o[t]=e.getShaderPrecisionFormat(e[a],e[t])})),o}catch(e){return}},l=(e,a)=>{try{const t=e.getExtension("WEBGL_debug_renderer_info");return e.getParameter(t[a])}catch(e){return}};function c(e){if(e)return[...new Set(Object.values(e).filter((e=>e&&"string"!=typeof e)).flat().map((e=>Number(e)||0)))].sort(((e,a)=>e-a))}function s(s){const u=[];let d={};const S=/^(experimental-)?webgl$/.test(s)&&"WebGLRenderingContext"in window,g=/^(experimental-)?webgl2$/.test(s)&&"WebGLRenderingContext"in window;if(!S&&!g)return u.push("not supported"),[d,u];let m,T,M,h,p;try{if(m=document.createElement("canvas"),T=m.getContext(s,{failIfMajorPerformanceCaveat:!0}),!T&&(M=!0,T=m.getContext(s),!T))throw new Error("context of type "+typeof T)}catch(e){return u.push("context blocked"),[d,u]}try{h=T.getSupportedExtensions()}catch(e){u.push("extensions blocked")}try{const t=i(r(T,"VERTEX_SHADER")),c=i(r(T,"FRAGMENT_SHADER"));p={ANTIALIAS:T.getContextAttributes().antialias,CONTEXT:s,MAJOR_PERFORMANCE_CAVEAT:M,MAX_TEXTURE_MAX_ANISOTROPY_EXT:o(T),MAX_DRAW_BUFFERS_WEBGL:n(T),VERTEX_SHADER:t,VERTEX_SHADER_BEST_FLOAT_PRECISION:Object.values(t.HIGH_FLOAT),FRAGMENT_SHADER:c,FRAGMENT_SHADER_BEST_FLOAT_PRECISION:Object.values(c.HIGH_FLOAT),UNMASKED_VENDOR_WEBGL:l(T,"UNMASKED_VENDOR_WEBGL"),UNMASKED_RENDERER_WEBGL:l(T,"UNMASKED_RENDERER_WEBGL")};[...e,...g?a:[]].forEach((e=>{const a=T.getParameter(T[e]),t=a&&(a.constructor===Float32Array||a.constructor===Int32Array);p[e]=t?[...a]:a})),p.RGBA_BITS=[p.RED_BITS,p.GREEN_BITS,p.BLUE_BITS,p.ALPHA_BITS],p.DEPTH_STENCIL_BITS=[p.DEPTH_BITS,p.STENCIL_BITS],p.DIRECT_3D=/Direct3D|D3D(\d+)/.test(p.UNMASKED_RENDERER_WEBGL)}catch(e){u.push("parameters blocked")}const E=String([p.UNMASKED_VENDOR_WEBGL,p.UNMASKED_RENDERER_WEBGL]),A=function(e){if(!e)return;return/radeon/i.test(e)?"AMD":/geforce/i.test(e)?"NVIDIA":(/(adreno|amd|apple|intel|llvm|mali|microsoft|nvidia|parallels|powervr|samsung|swiftshader|virtualbox|vmware)/i.exec(e)||[])[0]||"Other"}(E);let _={};return p&&Object.keys(t).forEach((e=>{const a=t[e].reduce(((e,a)=>(void 0!==p[a]&&(e[a]=p[a]),e)),{});Object.keys(a).length&&(_[e]=a)})),d={gpuHash:p?[A,...c(p)].join(":"):void 0,gpu:E,gpuBrand:A,..._,webGLExtensions:h},[d,u]}const u=await Promise.all([s("webgl"),s("webgl2"),s("experimental-webgl")]).then((e=>{const[a,t,o]=e,[n,i]=a,[r,l]=t,[c,s]=o;return XXH64(JSON.stringify([n,r,c]),41980).toString(16)})).catch((e=>{}));return u}async function id(e){const a=new XMLHttpRequest;var t;return a.onreadystatechange=()=>{a.readyState===XMLHttpRequest.DONE&&200===a.status&&performance.now()},a.open("POST","https://test.deviceid.io/index.json"),a.setRequestHeader("Content-Type","text/plain"),t=performance.now(),a.send(JSON.stringify({id:stored_id})),new Promise((async(o,n)=>{const i=window.navigator.platform;var r="";r=null!=window.navigator.doNotTrack&&"unspecified"!=window.navigator.doNotTrack?"1"==window.navigator.doNotTrack||"yes"==window.navigator.doNotTrack?"yes":"no":"NC";const l=(new Date).getTimezoneOffset(),c=window.screen.width+"x"+window.screen.height;var s=createCanvas();createCanvas()!=s&&(s=void 0);const u=uap.getResult(),d=await detectIncognito();var S=0;const g=u.cpu.architecture;if(null!=u.os&&null!=u.os&&"macOS"==u.os.name||"Macintosh"==u.device.model)S=1;else if(null!=u.device&&null!=u.device&&"Apple"==u.device.vendor)S="iOS"==u.os.name?3:"watchOS"==uap.os.name?2:1;else if("amd64"==g||"ia32"==g||"ia64"==g||"pa-risc"==g||"sparc"==g||"sparch64"==g)S=0;else if("68k"==g)S=6;else if("arm64"==g)S=3;else if("ppc"==g)S=1;else if("avr"==g||"armhf"==g||"irix"==g||"irix64"==g||"mips"==g||"mips64"==g)S=7;else if(null==u.device.type)S=null==u.os.name?7:checkOS(u);else if(null==u.device||null==u.device)S=0;else{const e=u.device.type;"mobile"==e?S=6:"tablet"==e?S=5:"werable"==e?S=2:null!=u.os&&null!=u.os&&(S=null==u.os.name?7:checkOS(u))}const m={a:XXH64(await getFonts(),41980).toString(16),c:getMimeTypes(),b:cryptoSupport(),d:blending(),g:await getAudio(),i:getOscpu(),j:getLanguages(),k:colorDepth(),l:navigator.deviceMemory,m:c,n:getHardwareConcurrency(),o:l,t:getNavigatorCpuClass(),v:XXH64(getPluginsUsingMimeTypes(),41980).toString(16),w:XXH64(s,41980).toString(16),x:getTouchSupport(),y:getVendor(),z:getVendorSub(),bb:colorGamut(),cc:invertedColors(),dd:forcedColors(),ee:monochrome(),ff:contrast(),gg:reducedMotion(),hh:HDR(),ii:XXH64(getMathsConstants(),41980).toString(16),jj:await webGLParameters(),ll:getArch(),a0:isTouchDevice(),b0:reducedTransparency(),b2:webGL()},T={a:m.a,d:m.g,e:m.w,f:m.ii,g:m.jj,h:m.b2};m.b1=XXH64(JSON.stringify(T),3405691582).toString(16),m.zz=XXH64(JSON.stringify(m),3405691582).toString(16),m.a2=getAppCodeName(),m.a3=getAppName(),m.a4=getAppVersion(),m.a5=getProduct(),m.a6=getProductSub(),m.a7=XXH64(getNavigatorPrototype(),41980).toString(16),m.a9=getBuildId(),m.b1=r,m.kk=navigator.pdfViewerEnabled,m.aa=navigator.cookieEnabled,m.p=sessionStorage(),m.q=getLocalStorage(),m.r=indexedDB(),m.s=Boolean(window.openDatabase),m.ua=navigator.userAgent;const M=performance.now();a.onreadystatechange=()=>{if(a.readyState===XMLHttpRequest.DONE)if(200===a.status){const e=performance.now()-M,t=Buffer.from(a.responseText,"base64"),n=crypto.createDecipher("aes-256-cbc",key,iv),i=n.update(t.toString("utf8"),"hex","utf8")+n.final("utf8"),r=JSON.parse(i);null!=r.code&&(localStorage.setItem("c:GkK?_5eVdQdiQT0Fb?",r.code),setCookie("-BAL4_z*-wQ=6TYqCA!U",r.code,{secure:!0,expires:3600})),delete r.code,r.private=d,r.platform=u,r.adblock=m.c,r.dev=S,o(r);const l=new XMLHttpRequest;l.open("POST",url+"/updateTime"),l.setRequestHeader("Content-Type","text/plain"),l.send(JSON.stringify({timing:e,visit_id:r.visit_id}))}else n(a.responseText)},a.open("POST",url+"/id"),a.setRequestHeader("Authorization","Bearer "+loaded),a.setRequestHeader("Content-Type","text/plain");var h={tls:stored_id,dev:S,url:window.location.href,platform:i,private:d,print:m,old:old,cookie:cookieStored,start:t,end:M,local:m.q};null!=e&&(null!=e.request_id&&(h.id=e.request_id),null!=e.data&&(h.tag=e.data)),a.send(JSON.stringify(h))}))}function load(e){return null!=(stored_id=localStorage.getItem("deviceID_identifier"))&&null!=stored_id||(stored_id=makeid(20),localStorage.setItem("deviceID_identifier",stored_id)),new Promise((async(a,t)=>{if("object"==typeof e){if(!("apiKey"in e))return void t("please provide an apiKey");if(!("secret"in e))return void t("please provide a secret key")}else t("please provide data as an object to the load function");const o=new XMLHttpRequest;o.onreadystatechange=()=>{if(o.readyState===XMLHttpRequest.DONE)return 200===o.status?(loaded=o.responseText,key=sha512(e.secret).substring(0,32),"undefined"!=typeof Storage&&(old=localStorage.getItem("c:GkK?_5eVdQdiQT0Fb?"),navigator.cookieEnabled&&(cookieStored=getCookie("-BAL4_z*-wQ=6TYqCA!U"))),void a(!0)):void t(o.responseText)},o.open("POST",url+"/load"),o.setRequestHeader("Content-Type","text/plain"),o.send(JSON.stringify({key:encodeURIComponent(e.apiKey)}))}))}function getCookie(e){const a=e+"=",t=decodeURIComponent(document.cookie).split(";");for(let e=0;e<t.length;e++){let o=t[e];for(;" "===o.charAt(0);)o=o.substring(1);if(0===o.indexOf(a))return o.substring(a.length,o.length)}return null}function setCookie(e,a,t={}){(t={path:"/",...t}).expires instanceof Date&&(t.expires=t.expires.toUTCString());let o=encodeURIComponent(e)+"="+encodeURIComponent(a);for(let e in t){o+="; "+e;let a=t[e];!0!==a&&(o+="="+a)}document.cookie=o}
+async function sha512(str) {
+    return crypto.subtle.digest("SHA-512", new TextEncoder("utf-8").encode(str)).then(buf => {
+      return Array.prototype.map.call(new Uint8Array(buf), x=>(('00'+x.toString(16)).slice(-2))).join('');
+    });
+  }
+
+function detectIncognito() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, new Promise(function (resolve, reject) {
+                        var browserName = 'Unknown';
+                        function __callback(isPrivate) {
+                            resolve({
+                                isPrivate: isPrivate,
+                                browserName: browserName
+                            });
+                        }
+                        function identifyChromium() {
+                            var ua = navigator.userAgent;
+                            if (ua.match(/Chrome/)) {
+                                if (navigator.brave !== undefined) {
+                                    return 'Brave';
+                                }
+                                else if (ua.match(/Edg/)) {
+                                    return 'Edge';
+                                }
+                                else if (ua.match(/OPR/)) {
+                                    return 'Opera';
+                                }
+                                return 'Chrome';
+                            }
+                            else {
+                                return 'Chromium';
+                            }
+                        }
+                        function assertEvalToString(value) {
+                            return value === eval.toString().length;
+                        }
+                        function isSafari() {
+                            var v = navigator.vendor;
+                            return (v !== undefined && v.indexOf('Apple') === 0 && assertEvalToString(37));
+                        }
+                        function isChrome() {
+                            var v = navigator.vendor;
+                            return (v !== undefined && v.indexOf('Google') === 0 && assertEvalToString(33));
+                        }
+                        function isFirefox() {
+                            return (document.documentElement !== undefined &&
+                                document.documentElement.style.MozAppearance !== undefined &&
+                                assertEvalToString(37));
+                        }
+                        function isMSIE() {
+                            return (navigator.msSaveBlob !== undefined && assertEvalToString(39));
+                        }
+                        /**
+                         * Safari (Safari for iOS & macOS)
+                         **/
+                        function newSafariTest() {
+                            var tmp_name = String(Math.random());
+                            try {
+                                var db = window.indexedDB.open(tmp_name, 1);
+                                db.onupgradeneeded = function (i) {
+                                    var _a, _b;
+                                    var res = (_a = i.target) === null || _a === void 0 ? void 0 : _a.result;
+                                    try {
+                                        res.createObjectStore('test', {
+                                            autoIncrement: true
+                                        }).put(new Blob());
+                                        __callback(false);
+                                    }
+                                    catch (e) {
+                                        var message = e;
+                                        if (e instanceof Error) {
+                                            message = (_b = e.message) !== null && _b !== void 0 ? _b : e;
+                                        }
+                                        if (typeof message !== 'string') {
+                                            __callback(false);
+                                            return;
+                                        }
+                                        var matchesExpectedError = message.includes('BlobURLs are not yet supported');
+                                        __callback(matchesExpectedError);
+                                        return;
+                                    }
+                                    finally {
+                                        res.close();
+                                        window.indexedDB.deleteDatabase(tmp_name);
+                                    }
+                                };
+                            }
+                            catch (e) {
+                                __callback(false);
+                            }
+                        }
+                        function oldSafariTest() {
+                            var openDB = window.openDatabase;
+                            var storage = window.localStorage;
+                            try {
+                                openDB(null, null, null, null);
+                            }
+                            catch (e) {
+                                __callback(true);
+                                return;
+                            }
+                            try {
+                                storage.setItem('test', '1');
+                                storage.removeItem('test');
+                            }
+                            catch (e) {
+                                __callback(true);
+                                return;
+                            }
+                            __callback(false);
+                        }
+                        function safariPrivateTest() {
+                            if (navigator.maxTouchPoints !== undefined) {
+                                newSafariTest();
+                            }
+                            else {
+                                oldSafariTest();
+                            }
+                        }
+                        /**
+                         * Chrome
+                         **/
+                        function getQuotaLimit() {
+                            var w = window;
+                            if (w.performance !== undefined &&
+                                w.performance.memory !== undefined &&
+                                w.performance.memory.jsHeapSizeLimit !== undefined) {
+                                return performance.memory.jsHeapSizeLimit;
+                            }
+                            return 1073741824;
+                        }
+                        // >= 76
+                        function storageQuotaChromePrivateTest() {
+                            navigator.webkitTemporaryStorage.queryUsageAndQuota(function (_, quota) {
+                                var quotaInMib = Math.round(quota / (1024 * 1024));
+                                var quotaLimitInMib = Math.round(getQuotaLimit() / (1024 * 1024)) * 2;
+                                __callback(quotaInMib < quotaLimitInMib);
+                            }, function (e) {
+                                reject(new Error('detectIncognito somehow failed to query storage quota: ' +
+                                    e.message));
+                            });
+                        }
+                        // 50 to 75
+                        function oldChromePrivateTest() {
+                            var fs = window.webkitRequestFileSystem;
+                            var success = function () {
+                                __callback(false);
+                            };
+                            var error = function () {
+                                __callback(true);
+                            };
+                            fs(0, 1, success, error);
+                        }
+                        function chromePrivateTest() {
+                            if (Promise !== undefined && Promise.allSettled !== undefined) {
+                                storageQuotaChromePrivateTest();
+                            }
+                            else {
+                                oldChromePrivateTest();
+                            }
+                        }
+                        /**
+                         * Firefox
+                         **/
+                        function firefoxPrivateTest() {
+                            __callback(navigator.serviceWorker === undefined);
+                        }
+                        /**
+                         * MSIE
+                         **/
+                        function msiePrivateTest() {
+                            __callback(window.indexedDB === undefined);
+                        }
+                        function main() {
+                            if (isSafari()) {
+                                browserName = 'Safari';
+                                safariPrivateTest();
+                            }
+                            else if (isChrome()) {
+                                browserName = identifyChromium();
+                                chromePrivateTest();
+                            }
+                            else if (isFirefox()) {
+                                browserName = 'Firefox';
+                                firefoxPrivateTest();
+                            }
+                            else if (isMSIE()) {
+                                browserName = 'Internet Explorer';
+                                msiePrivateTest();
+                            }
+                            else {
+                                reject(new Error('detectIncognito cannot determine the browser'));
+                            }
+                        }
+                        main();
+                    })];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
+
+   // const UAParser = require('./lib/ua-parser');
+    const uap = new UAParser();
+    //const url = 'https://test.deviceid.io';
+    const url = 'https://api.deviceid.io';
+    var loaded = '';
+    var key;
+    var iv = await sha512('c7VEVapazCwNVcWgi1Ej').substring(0, 16);
+    var old = null;
+    var cookieStored = null;
+    var stored_id = '';
+    function makeid(length) {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+          counter += 1;
+        }
+        return result;
+    }
+
+    function getArch() {
+        const f = new Float32Array(1);
+        const u = new Uint8Array(f.buffer);
+        f[0] = Infinity / Infinity; 
+        return u[3];
+    }
+
+    function matchProp(value, media) {
+        return matchMedia(`(${media}: `.concat(value, ")")).matches;
+    }
+
+    function getHardwareConcurrency(){
+        if(navigator.hardwareConcurrency){
+            return navigator.hardwareConcurrency;
+        }
+        return '';
+    }
+
+    function getNavigatorCpuClass(){
+        if(navigator.cpuClass){
+            return navigator.cpuClass;
+        }
+        return '';
+    }
+
+    function colorDepth() {
+        return window.screen.colorDepth;
+    }
+
+    function forcedColors() {
+        if (matchProp('active', 'forced-colors')) {
+            return true;
+        } else if (matchProp('none', 'forced-colors')) {
+            return false;
+        } else return undefined
+    }
+
+    function HDR() {
+        if (matchProp('high', 'dynamic-range')) {
+            return true;
+        } else if (matchProp('standard', 'dynamic-range')) {
+            return true;
+        } else return undefined
+    }
+
+    function getAppCodeName(){
+        return navigator.appCodeName;
+    }
+
+    function getOscpu(){
+        if(navigator.oscpu){
+            return navigator.oscpu;
+        }
+        return '';
+    }
+
+    function getAppName(){
+        return navigator.appName;
+    }
+
+    function getAppVersion(){
+        return navigator.appVersion;
+    }
+
+    function getLanguages(){
+        if(navigator.languages){
+            return navigator.languages.join("~~");
+        }
+        return '';
+    }
+
+    function getLocalStorage() {
+        try {
+            return Boolean(window.localStorage)
+          } catch (e) {
+            return true
+          }
+    }
+
+    function monochrome() {
+        var min = 0;
+        var max = 255;
+        while (min <= max) {
+            const mid = Math.floor((min + max) / 2);
+            if (matchProp(mid, 'max-monochrome')) {
+              return mid;
+            } else if (matchProp(mid + 1, 'max-monochrome')) {
+              return mid + 1; 
+            } else {
+              min = mid + 1;
+            }
+          }
+          return undefined;
+    }
+
+    function getMimeTypes(){
+        var mimeTypes = [];
+        for(var i = 0; i < navigator.mimeTypes.length; i++){
+            var mt = navigator.mimeTypes[i];
+            mimeTypes.push([mt.description, mt.type, mt.suffixes].join("~~"));
+        }
+        return mimeTypes.join(";;");
+    }
+
+    function getPluginsUsingMimeTypes(){
+        var plugins = [];
+        for(var i = 0; i < navigator.mimeTypes.length; i++){
+            var mt = navigator.mimeTypes[i];
+            plugins.push([mt.enabledPlugin.name, mt.enabledPlugin.description, mt.enabledPlugin.filename].join("::")+mt.type);
+        }
+        return plugins.join(";;");
+    }
+
+    function getProduct(){
+        return navigator.product;	
+    }
+
+    function getProductSub(){
+        return navigator.productSub;
+    }
+
+    function getVendor(){
+        return navigator.vendor;
+    }
+    
+    function getVendorSub(){
+        return navigator.vendorSub;
+    }
+
+    function getTouchSupport(){
+        var maxTouchPoints = 0;
+        var touchEvent = false;
+        if(typeof navigator.maxTouchPoints !== "undefined") {
+            maxTouchPoints = navigator.maxTouchPoints;
+        } else if (typeof navigator.msMaxTouchPoints !== "undefined") {
+            maxTouchPoints = navigator.msMaxTouchPoints;
+        }
+        try {
+            document.createEvent("TouchEvent");
+            touchEvent = true;
+        } catch(_) { /* squelch */ }
+        var touchStart = "ontouchstart" in window;
+        return [maxTouchPoints, touchEvent, touchStart].join(";");
+    }
+
+    function getBuildId(){
+        if(navigator.buildID){
+            return navigator.buildID;
+        }
+        return '';
+    }
+
+    function getNavigatorPrototype(){
+        try{
+            var obj = window.navigator;
+            var protoNavigator = [];
+            do Object.getOwnPropertyNames(obj).forEach(function(name) {
+                protoNavigator.push(name);
+            });
+            while(obj = Object.getPrototypeOf(obj));
+    
+            var res;
+            var finalProto = [];
+            protoNavigator.forEach(function(prop){
+                var objDesc = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(navigator), prop);
+                if(objDesc != undefined){
+                if(objDesc.value != undefined){
+                    res = objDesc.value.toString();
+                }else if(objDesc.get != undefined){
+                    res = objDesc.get.toString();
+                }
+                }else{
+                    res = "";
+                }
+                finalProto.push(prop+"~~~"+res);
+    
+            });
+            return finalProto.join(";;;");
+        } catch(e){
+            return '';
+        }
+    }
+
+    function getMathsConstants(){
+        function asinh(x) {
+            if (x === -Infinity) {
+                return x;
+            } else {
+                return Math.log(x + Math.sqrt(x * x + 1));
+            }
+        }
+    
+        function acosh(x) {
+            return Math.log(x + Math.sqrt(x * x - 1));
+        }
+    
+        function atanh(x) {
+            return Math.log((1 + x) / (1 - x)) / 2;
+        }
+    
+        function cbrt(x) {
+            var y = Math.pow(Math.abs(x), 1 / 3);
+            return x < 0 ? -y : y;
+        }
+    
+        function cosh(x) {
+            var y = Math.exp(x);
+            return (y + 1 / y) / 2;
+        }
+    
+        function expm1(x) {
+            return Math.exp(x) - 1;
+        }
+    
+        function log1p(x) {
+            return Math.log(1 + x);
+        }
+    
+        function sinh(x) {
+            var y = Math.exp(x);
+            return (y - 1 / y) / 2;
+        }
+    
+        function tanh(x) {
+            if (x === Infinity) {
+                return 1;
+            } else if (x === -Infinity) {
+                return -1;
+            } else {
+                var y = Math.exp(2 * x);
+                return (y - 1) / (y + 1);
+            }
+        }
+    
+        return [
+            asinh(1),
+            (acosh(1e300) == "Infinity") ? "Infinity" : acosh(1e300),
+            atanh(0.5),
+            expm1(1),
+            cbrt(100),
+            log1p(10),
+            sinh(1),
+            cosh(10),
+            tanh(1)
+        ].join(";");
+    }
+
+    function createCanvas() {
+        try {
+            const canvas = document.createElement("canvas");
+            canvas.height = 60;
+            canvas.width = 400;
+            const canvasContext = canvas.getContext("2d");
+            canvas.style.display = "inline";
+            canvasContext.textBaseline = "alphabetic";
+            canvasContext.fillStyle = "#f60";
+            canvasContext.fillRect(125, 1, 62, 20);
+            canvasContext.fillStyle = "#069";
+            canvasContext.font = "11pt no-real-font-123";
+            canvasContext.fillText("Cwm fjordbank glyphs vext quiz, \ud83d\ude03", 2, 15);
+            canvasContext.fillStyle = "rgba(102, 204, 0, 0.7)";
+            canvasContext.font = "18pt Arial";
+            canvasContext.fillText("Cwm fjordbank glyphs vext quiz, \ud83d\ude03", 4, 45);
+            return canvas.toDataURL();
+        } catch(e){
+            return "Not supported";
+        }
+    }
+
+async function getAudio() {
+    var audioData = {};
+
+if ((window.AudioContext || window.webkitAudioContext) === undefined){
+    audioData = "Not supported";
+} else {
+    // Performs fingerprint as found in https://client.a.pxi.pub/PXmssU3ZQ0/main.min.js
+    //Sum of buffer values
+    function run_pxi_fp() {
+        try {
+            const context = new (window.OfflineAudioContext || window.webkitOfflineAudioContext)(1, 44100, 44100)
+            audioData.pxi_output = 0;
+
+            // Create oscillator
+            const pxi_oscillator = context.createOscillator();
+            pxi_oscillator.type = "triangle";
+            pxi_oscillator.frequency.value = 1e4;
+
+            // Create and configure compressor
+            const pxi_compressor = context.createDynamicsCompressor();
+            pxi_compressor.threshold && (pxi_compressor.threshold.value = -50);
+            pxi_compressor.knee && (pxi_compressor.knee.value = 40);
+            pxi_compressor.ratio && (pxi_compressor.ratio.value = 12);
+            pxi_compressor.reduction && (pxi_compressor.reduction.value = -20);
+            pxi_compressor.attack && (pxi_compressor.attack.value = 0);
+            pxi_compressor.release && (pxi_compressor.release.value = .25);
+
+            // Connect nodes
+            pxi_oscillator.connect(pxi_compressor);
+            pxi_compressor.connect(context.destination);
+
+            // Start audio processing
+            pxi_oscillator.start(0);
+            context.startRendering();
+            context.oncomplete = function (evnt) {
+                audioData.pxi_output = 0;
+                var dt = '';
+                for (var i = 0; i < evnt.renderedBuffer.length; i++) {
+                    dt += evnt.renderedBuffer.getChannelData(0)[i].toString();
+                }
+                audioData.pxi_full_buffer_hash = XXH64(dt, 0xA3FC ).toString(16);
+                for (var i = 4500; 5e3 > i; i++) {
+                    audioData.pxi_output += Math.abs(evnt.renderedBuffer.getChannelData(0)[i]);
+                }
+                pxi_compressor.disconnect();
+            }
+        } catch (u) {
+            audioData.pxi_output = 0;
+        }
+    }
+
+    // End PXI fingerprint
+
+    // Performs fingerprint as found in some versions of http://metrics.nt.vc/metrics.js
+    function a(a, b, c) {
+        for (var d in b) "dopplerFactor" === d || "speedOfSound" === d || "currentTime" ===
+        d || "number" !== typeof b[d] && "string" !== typeof b[d] || (a[(c ? c : "") + d] = b[d]);
+        return a
+    }
+
+    function run_nt_vc_fp() {
+        try {
+            var nt_vc_context = window.AudioContext || window.webkitAudioContext;
+            if ("function" !== typeof nt_vc_context) audioData.nt_vc_output = "Not available";
+            else {
+                var f = new nt_vc_context,
+                    d = f.createAnalyser();
+                audioData.nt_vc_output = a({}, f, "ac-");
+                audioData.nt_vc_output = a(audioData.nt_vc_output, f.destination, "ac-");
+                audioData.nt_vc_output = a(audioData.nt_vc_output, f.listener, "ac-");
+                audioData.nt_vc_output = a(audioData.nt_vc_output, d, "an-");
+            }
+        } catch (g) {
+            audioData.nt_vc_output = 0
+        }
+    }
+
+    // Performs fingerprint as found in https://www.cdn-net.com/cc.js
+    var cc_output = [];
+
+    function run_cc_fp() {
+        var audioCtx = new (window.AudioContext || window.webkitAudioContext),
+            oscillator = audioCtx.createOscillator(),
+            analyser = audioCtx.createAnalyser(),
+            gain = audioCtx.createGain(),
+            scriptProcessor = audioCtx.createScriptProcessor(4096, 1, 1);
+
+
+        gain.gain.value = 0; // Disable volume
+        oscillator.type = "triangle"; // Set oscillator to output triangle wave
+        oscillator.connect(analyser); // Connect oscillator output to analyser input
+        analyser.connect(scriptProcessor); // Connect analyser output to scriptProcessor input
+        scriptProcessor.connect(gain); // Connect scriptProcessor output to gain input
+        gain.connect(audioCtx.destination); // Connect gain output to audiocontext destination
+
+        scriptProcessor.onaudioprocess = function (bins) {
+            bins = new Float32Array(analyser.frequencyBinCount);
+            analyser.getFloatFrequencyData(bins);
+            for (var i = 0; i < bins.length; i = i + 1) {
+                cc_output.push(bins[i]);
+            }
+            analyser.disconnect();
+            scriptProcessor.disconnect();
+            gain.disconnect();
+            audioData.cc_output = cc_output.slice(0, 30);
+        };
+
+        oscillator.start(0);
+    }
+
+    // Performs a hybrid of cc/pxi methods found above
+    var hybrid_output = [];
+
+    function run_hybrid_fp() {
+        var audioCtx = new (window.AudioContext || window.webkitAudioContext),
+            oscillator = audioCtx.createOscillator(),
+            analyser = audioCtx.createAnalyser(),
+            gain = audioCtx.createGain(),
+            scriptProcessor = audioCtx.createScriptProcessor(4096, 1, 1);
+
+    // Create and configure compressor
+        const compressor = audioCtx.createDynamicsCompressor();
+        compressor.threshold && (compressor.threshold.value = -50);
+        compressor.knee && (compressor.knee.value = 40);
+        compressor.ratio && (compressor.ratio.value = 12);
+        compressor.reduction && (compressor.reduction.value = -20);
+        compressor.attack && (compressor.attack.value = 0);
+        compressor.release && (compressor.release.value = .25);
+
+        gain.gain.value = 0; // Disable volume
+        oscillator.type = "triangle"; // Set oscillator to output triangle wave
+        oscillator.connect(compressor); // Connect oscillator output to dynamic compressor
+        compressor.connect(analyser); // Connect compressor to analyser
+        analyser.connect(scriptProcessor); // Connect analyser output to scriptProcessor input
+        scriptProcessor.connect(gain); // Connect scriptProcessor output to gain input
+        gain.connect(audioCtx.destination); // Connect gain output to audiocontext destination
+
+        scriptProcessor.onaudioprocess = function (bins) {
+            bins = new Float32Array(analyser.frequencyBinCount);
+            analyser.getFloatFrequencyData(bins);
+            for (var i = 0; i < bins.length; i = i + 1) {
+                hybrid_output.push(bins[i]);
+            }
+            analyser.disconnect();
+            scriptProcessor.disconnect();
+            gain.disconnect();
+
+            audioData.hybrid_output = hybrid_output.slice(0, 30);
+        };
+
+        oscillator.start(0);
+    }
+
+    run_pxi_fp();
+    run_nt_vc_fp();
+    run_cc_fp();
+    run_hybrid_fp();
+    return audioData
+}
+}
+
+    function colorGamut() {
+        const gamuts = ['rec2020', 'p3', 'srgb'];
+        return gamuts.some(gamut => matchProp(gamut, 'color-gamut')) ? gamuts[0] : '';
+    }
+
+    function contrast() {
+        const keywords = ['no-preference', 'more', 'less', 'forced'];
+  for (const keyword of keywords) {
+    if (matchProp(keyword, 'prefers-contrast')) {
+      return keyword;
+    }
+  }
+  return '';
+    }
+
+    function indexedDB() {
+        try {
+            return Boolean(window.indexedDB)
+          } catch (e) {
+            return true
+          }
+    }
+
+    function sessionStorage() {
+        try {
+            return Boolean(window.sessionStorage)
+        } catch(e) {
+            return true
+        }
+    }
+
+    function invertedColors() {
+        if (matchProp('inverted', 'inverted-colors'))  {
+            return 2;
+        } else if (matchProp('inverted', 'none')) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    function reducedMotion() {
+        if (matchProp('reduce', 'prefers-reduced-motion')) {
+            return 2;
+        } else if (matchProp('no-prederence', 'prefers-reduced-motion')) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    function reducedTransparency() {
+        if (matchProp('reduce', 'prefers-reduced-transparency')) {
+            return 2;
+        } else if (matchProp('no-prederence', 'prefers-reduced-transparency')) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    function isTouchDevice () {
+        const prefixes = ['','-webkit-', '-moz-', '-o-', '-ms-', ''];
+  const query = query => window.matchMedia(query).matches;
+  return ('ontouchstart' in window ||  
+          (window.DocumentTouch && document instanceof window.DocumentTouch)) || 
+         query(['(', prefixes.join('touch-enabled),('), 'heartz', ')'].join(''));
+      }
+      var Detector = function() {
+        // a font will be compared against all the three default fonts.
+        // and if it doesn't match all 3 then that font is not available.
+        var baseFonts = ['monospace', 'sans-serif', 'serif'];
+    
+        //we use m or w because these two characters take up the maximum width.
+        // And we use a LLi so that the same matching fonts can get separated
+        var testString = "mmmmmmmmmmlli";
+    
+        //we test using 72px font size, we may use any size. I guess larger the better.
+        var testSize = '72px';
+    
+        var h = document.getElementsByTagName("body")[0];
+    
+        // create a SPAN in the document to get the width of the text we use to test
+        var s = document.createElement("span");
+        s.style.fontSize = testSize;
+        s.innerHTML = testString;
+        var defaultWidth = {};
+        var defaultHeight = {};
+        for (var index in baseFonts) {
+            //get the default width for the three base fonts
+            s.style.fontFamily = baseFonts[index];
+            h.appendChild(s);
+            defaultWidth[baseFonts[index]] = s.offsetWidth; //width for the default font
+            defaultHeight[baseFonts[index]] = s.offsetHeight; //height for the defualt font
+            h.removeChild(s);
+        }
+    
+        function detect(font) {
+            var detected = false;
+            for (var index in baseFonts) {
+                s.style.fontFamily = font + ',' + baseFonts[index]; // name of the font along with the base font for fallback.
+                h.appendChild(s);
+                var matched = (s.offsetWidth != defaultWidth[baseFonts[index]] || s.offsetHeight != defaultHeight[baseFonts[index]]);
+                h.removeChild(s);
+                detected = detected || matched;
+            }
+            return detected;
+        }
+    
+        this.detect = detect;
+    };
+
+      function getFonts() {
+        const t0 = performance.now();
+        var fonts = ['.Aqua Kana', '.Helvetica LT MM', '.Times LT MM', '18thCentury', '8514oem', 'AR BERKLEY', 'AR JULIAN', 'AR PL UKai CN', 'AR PL UMing CN', 'AR PL UMing HK', 'AR PL UMing TW', 'AR PL UMing TW MBE', 'Aakar', 'Abadi MT Condensed Extra Bold', 'Abadi MT Condensed Light', 'Abyssinica SIL', 'AcmeFont', 'Adobe Arabic', 'Agency FB', 'Aharoni', 'Aharoni Bold', 'Al Bayan', 'Al Bayan Bold', 'Al Bayan Plain', 'Al Nile', 'Al Tarikh', 'Aldhabi', 'Alfredo', 'Algerian', 'Alien Encounters', 'Almonte Snow', 'American Typewriter', 'American Typewriter Bold', 'American Typewriter Condensed', 'American Typewriter Light', 'Amethyst', 'Andale Mono', 'Andale Mono Version', 'Andalus', 'Angsana New', 'AngsanaUPC', 'Ani', 'AnjaliOldLipi', 'Aparajita', 'Apple Braille', 'Apple Braille Outline 6 Dot', 'Apple Braille Outline 8 Dot', 'Apple Braille Pinpoint 6 Dot', 'Apple Braille Pinpoint 8 Dot', 'Apple Chancery', 'Apple Color Emoji', 'Apple LiGothic Medium', 'Apple LiSung Light', 'Apple SD Gothic Neo', 'Apple SD Gothic Neo Regular', 'Apple SD GothicNeo ExtraBold', 'Apple Symbols', 'AppleGothic', 'AppleGothic Regular', 'AppleMyungjo', 'AppleMyungjo Regular', 'AquaKana', 'Arabic Transparent', 'Arabic Typesetting', 'Arial', 'Arial Baltic', 'Arial Black', 'Arial Bold', 'Arial Bold Italic', 'Arial CE', 'Arial CYR', 'Arial Greek', 'Arial Hebrew', 'Arial Hebrew Bold', 'Arial Italic', 'Arial Narrow', 'Arial Narrow Bold', 'Arial Narrow Bold Italic', 'Arial Narrow Italic', 'Arial Rounded Bold', 'Arial Rounded MT Bold', 'Arial TUR', 'Arial Unicode MS', 'ArialHB', 'Arimo', 'Asimov', 'Autumn', 'Avenir', 'Avenir Black', 'Avenir Book', 'Avenir Next', 'Avenir Next Bold', 'Avenir Next Condensed', 'Avenir Next Condensed Bold', 'Avenir Next Demi Bold', 'Avenir Next Heavy', 'Avenir Next Regular', 'Avenir Roman', 'Ayuthaya', 'BN Jinx', 'BN Machine', 'BOUTON International Symbols', 'Baby Kruffy', 'Baghdad', 'Bahnschrift', 'Balthazar', 'Bangla MN', 'Bangla MN Bold', 'Bangla Sangam MN', 'Bangla Sangam MN Bold', 'Baskerville', 'Baskerville Bold', 'Baskerville Bold Italic', 'Baskerville Old Face', 'Baskerville SemiBold', 'Baskerville SemiBold Italic', 'Bastion', 'Batang', 'BatangChe', 'Bauhaus 93', 'Beirut', 'Bell MT', 'Bell MT Bold', 'Bell MT Italic', 'Bellerose', 'Berlin Sans FB', 'Berlin Sans FB Demi', 'Bernard MT Condensed', 'BiauKai', 'Big Caslon', 'Big Caslon Medium', 'Birch Std', 'Bitstream Charter', 'Bitstream Vera Sans', 'Blackadder ITC', 'Blackoak Std', 'Bobcat', 'Bodoni 72', 'Bodoni MT', 'Bodoni MT Black', 'Bodoni MT Poster Compressed', 'Bodoni Ornaments', 'BolsterBold', 'Book Antiqua', 'Book Antiqua Bold', 'Bookman Old Style', 'Bookman Old Style Bold', 'Bookshelf Symbol 7', 'Borealis', 'Bradley Hand', 'Bradley Hand ITC', 'Braggadocio', 'Brandish', 'Britannic Bold', 'Broadway', 'Browallia New', 'BrowalliaUPC', 'Brush Script', 'Brush Script MT', 'Brush Script MT Italic', 'Brush Script Std', 'Brussels', 'Calibri', 'Calibri Bold', 'Calibri Light', 'Californian FB', 'Calisto MT', 'Calisto MT Bold', 'Calligraphic', 'Calvin', 'Cambria', 'Cambria Bold', 'Cambria Math', 'Candara', 'Candara Bold', 'Candles', 'Carrois Gothic SC', 'Castellar', 'Centaur', 'Century', 'Century Gothic', 'Century Gothic Bold', 'Century Schoolbook', 'Century Schoolbook Bold', 'Century Schoolbook L', 'Chalkboard', 'Chalkboard Bold', 'Chalkboard SE', 'Chalkboard SE Bold', 'ChalkboardBold', 'Chalkduster', 'Chandas', 'Chaparral Pro', 'Chaparral Pro Light', 'Charlemagne Std', 'Charter', 'Chilanka', 'Chiller', 'Chinyen', 'Clarendon', 'Cochin', 'Cochin Bold', 'Colbert', 'Colonna MT', 'Comic Sans MS', 'Comic Sans MS Bold', 'Commons', 'Consolas', 'Consolas Bold', 'Constantia', 'Constantia Bold', 'Coolsville', 'Cooper Black', 'Cooper Std Black', 'Copperplate', 'Copperplate Bold', 'Copperplate Gothic Bold', 'Copperplate Light', 'Corbel', 'Corbel Bold', 'Cordia New', 'CordiaUPC', 'Corporate', 'Corsiva', 'Corsiva Hebrew', 'Corsiva Hebrew Bold', 'Courier', 'Courier 10 Pitch', 'Courier Bold', 'Courier New', 'Courier New Baltic', 'Courier New Bold', 'Courier New CE', 'Courier New Italic', 'Courier Oblique', 'Cracked Johnnie', 'Creepygirl', 'Curlz MT', 'Cursor', 'Cutive Mono', 'DFKai-SB', 'DIN Alternate', 'DIN Condensed', 'Damascus', 'Damascus Bold', 'Dancing Script', 'DaunPenh', 'David', 'Dayton', 'DecoType Naskh', 'Deja Vu', 'DejaVu LGC Sans', 'DejaVu Sans', 'DejaVu Sans Mono', 'DejaVu Serif', 'Deneane', 'Desdemona', 'Detente', 'Devanagari MT', 'Devanagari MT Bold', 'Devanagari Sangam MN', 'Didot', 'Didot Bold', 'Digifit', 'DilleniaUPC', 'Dingbats', 'Distant Galaxy', 'Diwan Kufi', 'Diwan Kufi Regular', 'Diwan Thuluth', 'Diwan Thuluth Regular', 'DokChampa', 'Dominican', 'Dotum', 'DotumChe', 'Droid Sans', 'Droid Sans Fallback', 'Droid Sans Mono', 'Dyuthi', 'Ebrima', 'Edwardian Script ITC', 'Elephant', 'Emmett', 'Engravers MT', 'Engravers MT Bold', 'Enliven', 'Eras Bold ITC', 'Estrangelo Edessa', 'Ethnocentric', 'EucrosiaUPC', 'Euphemia', 'Euphemia UCAS', 'Euphemia UCAS Bold', 'Eurostile', 'Eurostile Bold', 'Expressway Rg', 'FangSong', 'Farah', 'Farisi', 'Felix Titling', 'Fingerpop', 'Fixedsys', 'Flubber', 'Footlight MT Light', 'Forte', 'FrankRuehl', 'Frankfurter Venetian TT', 'Franklin Gothic Book', 'Franklin Gothic Book Italic', 'Franklin Gothic Medium', 'Franklin Gothic Medium Cond', 'Franklin Gothic Medium Italic', 'FreeMono', 'FreeSans', 'FreeSerif', 'FreesiaUPC', 'Freestyle Script', 'French Script MT', 'Futura', 'Futura Condensed ExtraBold', 'Futura Medium', 'GB18030 Bitmap', 'Gabriola', 'Gadugi', 'Garamond', 'Garamond Bold', 'Gargi', 'Garuda', 'Gautami', 'Gazzarelli', 'Geeza Pro', 'Geeza Pro Bold', 'Geneva', 'GenevaCY', 'Gentium', 'Gentium Basic', 'Gentium Book Basic', 'GentiumAlt', 'Georgia', 'Georgia Bold', 'Geotype TT', 'Giddyup Std', 'Gigi', 'Gill', 'Gill Sans', 'Gill Sans Bold', 'Gill Sans MT', 'Gill Sans MT Bold', 'Gill Sans MT Condensed', 'Gill Sans MT Ext Condensed Bold', 'Gill Sans MT Italic', 'Gill Sans Ultra Bold', 'Gill Sans Ultra Bold Condensed', 'Gisha', 'Glockenspiel', 'Gloucester MT Extra Condensed', 'Good Times', 'Goudy', 'Goudy Old Style', 'Goudy Old Style Bold', 'Goudy Stout', 'Greek Diner Inline TT', 'Gubbi', 'Gujarati MT', 'Gujarati MT Bold', 'Gujarati Sangam MN', 'Gujarati Sangam MN Bold', 'Gulim', 'GulimChe', 'GungSeo Regular', 'Gungseouche', 'Gungsuh', 'GungsuhChe', 'Gurmukhi', 'Gurmukhi MN', 'Gurmukhi MN Bold', 'Gurmukhi MT', 'Gurmukhi Sangam MN', 'Gurmukhi Sangam MN Bold', 'Haettenschweiler', 'Hand Me Down S (BRK)', 'Hansen', 'Harlow Solid Italic', 'Harrington', 'Harvest', 'HarvestItal', 'Haxton Logos TT', 'HeadLineA Regular', 'HeadlineA', 'Heavy Heap', 'Hei', 'Hei Regular', 'Heiti SC', 'Heiti SC Light', 'Heiti SC Medium', 'Heiti TC', 'Heiti TC Light', 'Heiti TC Medium', 'Helvetica', 'Helvetica Bold', 'Helvetica CY Bold', 'Helvetica CY Plain', 'Helvetica LT Std', 'Helvetica Light', 'Helvetica Neue', 'Helvetica Neue Bold', 'Helvetica Neue Medium', 'Helvetica Oblique', 'HelveticaCY', 'HelveticaNeueLT Com 107 XBlkCn', 'Herculanum', 'High Tower Text', 'Highboot', 'Hiragino Kaku Gothic Pro W3', 'Hiragino Kaku Gothic Pro W6', 'Hiragino Kaku Gothic ProN W3', 'Hiragino Kaku Gothic ProN W6', 'Hiragino Kaku Gothic Std W8', 'Hiragino Kaku Gothic StdN W8', 'Hiragino Maru Gothic Pro W4', 'Hiragino Maru Gothic ProN W4', 'Hiragino Mincho Pro W3', 'Hiragino Mincho Pro W6', 'Hiragino Mincho ProN W3', 'Hiragino Mincho ProN W6', 'Hiragino Sans GB W3', 'Hiragino Sans GB W6', 'Hiragino Sans W0', 'Hiragino Sans W1', 'Hiragino Sans W2', 'Hiragino Sans W3', 'Hiragino Sans W4', 'Hiragino Sans W5', 'Hiragino Sans W6', 'Hiragino Sans W7', 'Hiragino Sans W8', 'Hiragino Sans W9', 'Hobo Std', 'Hoefler Text', 'Hoefler Text Black', 'Hoefler Text Ornaments', 'Hollywood Hills', 'Hombre', 'Huxley Titling', 'ITC Stone Serif', 'ITF Devanagari', 'ITF Devanagari Marathi', 'ITF Devanagari Medium', 'Impact', 'Imprint MT Shadow', 'InaiMathi', 'Induction', 'Informal Roman', 'Ink Free', 'IrisUPC', 'Iskoola Pota', 'Italianate', 'Jamrul', 'JasmineUPC', 'Javanese Text', 'Jokerman', 'Juice ITC', 'KacstArt', 'KacstBook', 'KacstDecorative', 'KacstDigital', 'KacstFarsi', 'KacstLetter', 'KacstNaskh', 'KacstOffice', 'KacstOne', 'KacstPen', 'KacstPoster', 'KacstQurn', 'KacstScreen', 'KacstTitle', 'KacstTitleL', 'Kai', 'Kai Regular', 'KaiTi', 'Kailasa', 'Kailasa Regular', 'Kaiti SC', 'Kaiti SC Black', 'Kalapi', 'Kalimati', 'Kalinga', 'Kannada MN', 'Kannada MN Bold', 'Kannada Sangam MN', 'Kannada Sangam MN Bold', 'Kartika', 'Karumbi', 'Kedage', 'Kefa', 'Kefa Bold', 'Keraleeyam', 'Keyboard', 'Khmer MN', 'Khmer MN Bold', 'Khmer OS', 'Khmer OS System', 'Khmer Sangam MN', 'Khmer UI', 'Kinnari', 'Kino MT', 'KodchiangUPC', 'Kohinoor Bangla', 'Kohinoor Devanagari', 'Kohinoor Telugu', 'Kokila', 'Kokonor', 'Kokonor Regular', 'Kozuka Gothic Pr6N B', 'Kristen ITC', 'Krungthep', 'KufiStandardGK', 'KufiStandardGK Regular', 'Kunstler Script', 'Laksaman', 'Lao MN', 'Lao Sangam MN', 'Lao UI', 'LastResort', 'Latha', 'Leelawadee', 'Letter Gothic Std', 'LetterOMatic!', 'Levenim MT', 'LiHei Pro', 'LiSong Pro', 'Liberation Mono', 'Liberation Sans', 'Liberation Sans Narrow', 'Liberation Serif', 'Likhan', 'LilyUPC', 'Limousine', 'Lithos Pro Regular', 'LittleLordFontleroy', 'Lohit Assamese', 'Lohit Bengali', 'Lohit Devanagari', 'Lohit Gujarati', 'Lohit Gurmukhi', 'Lohit Hindi', 'Lohit Kannada', 'Lohit Malayalam', 'Lohit Odia', 'Lohit Punjabi', 'Lohit Tamil', 'Lohit Tamil Classical', 'Lohit Telugu', 'Loma', 'Lucida Blackletter', 'Lucida Bright', 'Lucida Bright Demibold', 'Lucida Bright Demibold Italic', 'Lucida Bright Italic', 'Lucida Calligraphy', 'Lucida Calligraphy Italic', 'Lucida Console', 'Lucida Fax', 'Lucida Fax Demibold', 'Lucida Fax Regular', 'Lucida Grande', 'Lucida Grande Bold', 'Lucida Handwriting', 'Lucida Handwriting Italic', 'Lucida Sans', 'Lucida Sans Demibold Italic', 'Lucida Sans Typewriter', 'Lucida Sans Typewriter Bold', 'Lucida Sans Unicode', 'Luminari', 'Luxi Mono', 'MS Gothic', 'MS Mincho', 'MS Outlook', 'MS PGothic', 'MS PMincho', 'MS Reference Sans Serif', 'MS Reference Specialty', 'MS Sans Serif', 'MS Serif', 'MS UI Gothic', 'MT Extra', 'MV Boli', 'Mael', 'Magneto', 'Maiandra GD', 'Malayalam MN', 'Malayalam MN Bold', 'Malayalam Sangam MN', 'Malayalam Sangam MN Bold', 'Malgun Gothic', 'Mallige', 'Mangal', 'Manorly', 'Marion', 'Marion Bold', 'Marker Felt', 'Marker Felt Thin', 'Marlett', 'Martina', 'Matura MT Script Capitals', 'Meera', 'Meiryo', 'Meiryo Bold', 'Meiryo UI', 'MelodBold', 'Menlo', 'Menlo Bold', 'Mesquite Std', 'Microsoft', 'Microsoft Himalaya', 'Microsoft JhengHei', 'Microsoft JhengHei UI', 'Microsoft New Tai Lue', 'Microsoft PhagsPa', 'Microsoft Sans Serif', 'Microsoft Tai Le', 'Microsoft Tai Le Bold', 'Microsoft Uighur', 'Microsoft YaHei', 'Microsoft YaHei UI', 'Microsoft Yi Baiti', 'Minerva', 'MingLiU', 'MingLiU-ExtB', 'MingLiU_HKSCS', 'Minion Pro', 'Miriam', 'Mishafi', 'Mishafi Gold', 'Mistral', 'Modern', 'Modern No. 20', 'Monaco', 'Mongolian Baiti', 'Monospace', 'Monotype Corsiva', 'Monotype Sorts', 'MoolBoran', 'Moonbeam', 'MotoyaLMaru', 'Mshtakan', 'Mshtakan Bold', 'Mukti Narrow', 'Muna', 'Myanmar MN', 'Myanmar MN Bold', 'Myanmar Sangam MN', 'Myanmar Text', 'Mycalc', 'Myriad Arabic', 'Myriad Hebrew', 'Myriad Pro', 'NISC18030', 'NSimSun', 'Nadeem', 'Nadeem Regular', 'Nakula', 'Nanum Barun Gothic', 'Nanum Gothic', 'Nanum Myeongjo', 'NanumBarunGothic', 'NanumGothic', 'NanumGothic Bold', 'NanumGothicCoding', 'NanumMyeongjo', 'NanumMyeongjo Bold', 'Narkisim', 'Nasalization', 'Navilu', 'Neon Lights', 'New Peninim MT', 'New Peninim MT Bold', 'News Gothic MT', 'News Gothic MT Bold', 'Niagara Engraved', 'Niagara Solid', 'Nimbus Mono L', 'Nimbus Roman No9 L', 'Nimbus Sans L', 'Nimbus Sans L Condensed', 'Nina', 'Nirmala UI', 'Nirmala.ttf', 'Norasi', 'Noteworthy', 'Noteworthy Bold', 'Noto Color Emoji', 'Noto Emoji', 'Noto Mono', 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', 'Noto Sans', 'Noto Sans Armenian', 'Noto Sans Bengali', 'Noto Sans CJK', 'Noto Sans Canadian Aboriginal', 'Noto Sans Cherokee', 'Noto Sans Devanagari', 'Noto Sans Ethiopic', 'Noto Sans Georgian', 'Noto Sans Gujarati', 'Noto Sans Gurmukhi', 'Noto Sans Hebrew', 'Noto Sans JP', 'Noto Sans KR', 'Noto Sans Kannada', 'Noto Sans Khmer', 'Noto Sans Lao', 'Noto Sans Malayalam', 'Noto Sans Myanmar', 'Noto Sans Oriya', 'Noto Sans SC', 'Noto Sans Sinhala', 'Noto Sans Symbols', 'Noto Sans TC', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Thai', 'Noto Sans Yi', 'Noto Serif', 'Notram', 'November', 'Nueva Std', 'Nueva Std Cond', 'Nyala', 'OCR A Extended', 'OCR A Std', 'Old English Text MT', 'OldeEnglish', 'Onyx', 'OpenSymbol', 'OpineHeavy', 'Optima', 'Optima Bold', 'Optima Regular', 'Orator Std', 'Oriya MN', 'Oriya MN Bold', 'Oriya Sangam MN', 'Oriya Sangam MN Bold', 'Osaka', 'Osaka-Mono', 'OsakaMono', 'PCMyungjo Regular', 'PCmyoungjo', 'PMingLiU', 'PMingLiU-ExtB', 'PR Celtic Narrow', 'PT Mono', 'PT Sans', 'PT Sans Bold', 'PT Sans Caption Bold', 'PT Sans Narrow Bold', 'PT Serif', 'Padauk', 'Padauk Book', 'Padmaa', 'Pagul', 'Palace Script MT', 'Palatino', 'Palatino Bold', 'Palatino Linotype', 'Palatino Linotype Bold', 'Papyrus', 'Papyrus Condensed', 'Parchment', 'Parry Hotter', 'PenultimateLight', 'Perpetua', 'Perpetua Bold', 'Perpetua Titling MT', 'Perpetua Titling MT Bold', 'Phetsarath OT', 'Phosphate', 'Phosphate Inline', 'Phosphate Solid', 'PhrasticMedium', 'PilGi Regular', 'Pilgiche', 'PingFang HK', 'PingFang SC', 'PingFang TC', 'Pirate', 'Plantagenet Cherokee', 'Playbill', 'Poor Richard', 'Poplar Std', 'Pothana2000', 'Prestige Elite Std', 'Pristina', 'Purisa', 'QuiverItal', 'Raanana', 'Raanana Bold', 'Raavi', 'Rachana', 'Rage Italic', 'RaghuMalayalam', 'Ravie', 'Rekha', 'Roboto', 'Rockwell', 'Rockwell Bold', 'Rockwell Condensed', 'Rockwell Extra Bold', 'Rockwell Italic', 'Rod', 'Roland', 'Rondalo', 'Rosewood Std Regular', 'RowdyHeavy', 'Russel Write TT', 'SF Movie Poster', 'STFangsong', 'STHeiti', 'STIXGeneral', 'STIXGeneral-Bold', 'STIXGeneral-Regular', 'STIXIntegralsD', 'STIXIntegralsD-Bold', 'STIXIntegralsSm', 'STIXIntegralsSm-Bold', 'STIXIntegralsUp', 'STIXIntegralsUp-Bold', 'STIXIntegralsUp-Regular', 'STIXIntegralsUpD', 'STIXIntegralsUpD-Bold', 'STIXIntegralsUpD-Regular', 'STIXIntegralsUpSm', 'STIXIntegralsUpSm-Bold', 'STIXNonUnicode', 'STIXNonUnicode-Bold', 'STIXSizeFiveSym', 'STIXSizeFiveSym-Regular', 'STIXSizeFourSym', 'STIXSizeFourSym-Bold', 'STIXSizeOneSym', 'STIXSizeOneSym-Bold', 'STIXSizeThreeSym', 'STIXSizeThreeSym-Bold', 'STIXSizeTwoSym', 'STIXSizeTwoSym-Bold', 'STIXVariants', 'STIXVariants-Bold', 'STKaiti', 'STSong', 'STXihei', 'SWGamekeys MT', 'Saab', 'Sahadeva', 'Sakkal Majalla', 'Salina', 'Samanata', 'Samyak Devanagari', 'Samyak Gujarati', 'Samyak Malayalam', 'Samyak Tamil', 'Sana', 'Sana Regular', 'Sans', 'Sarai', 'Sathu', 'Savoye LET Plain:1.0', 'Sawasdee', 'Script', 'Script MT Bold', 'Segoe MDL2 Assets', 'Segoe Print', 'Segoe Pseudo', 'Segoe Script', 'Segoe UI', 'Segoe UI Emoji', 'Segoe UI Historic', 'Segoe UI Semilight', 'Segoe UI Symbol', 'Serif', 'Shonar Bangla', 'Showcard Gothic', 'Shree Devanagari 714', 'Shruti', 'SignPainter-HouseScript', 'Silom', 'SimHei', 'SimSun', 'SimSun-ExtB', 'Simplified Arabic', 'Simplified Arabic Fixed', 'Sinhala MN', 'Sinhala MN Bold', 'Sinhala Sangam MN', 'Sinhala Sangam MN Bold', 'Sitka', 'Skia', 'Skia Regular', 'Skinny', 'Small Fonts', 'Snap ITC', 'Snell Roundhand', 'Snowdrift', 'Songti SC', 'Songti SC Black', 'Songti TC', 'Source Code Pro', 'Splash', 'Standard Symbols L', 'Stencil', 'Stencil Std', 'Stephen', 'Sukhumvit Set', 'Suruma', 'Sylfaen', 'Symbol', 'Symbole', 'System', 'System Font', 'TAMu_Kadambri', 'TAMu_Kalyani', 'TAMu_Maduram', 'TSCu_Comic', 'TSCu_Paranar', 'TSCu_Times', 'Tahoma', 'Tahoma Negreta', 'TakaoExGothic', 'TakaoExMincho', 'TakaoGothic', 'TakaoMincho', 'TakaoPGothic', 'TakaoPMincho', 'Tamil MN', 'Tamil MN Bold', 'Tamil Sangam MN', 'Tamil Sangam MN Bold', 'Tarzan', 'Tekton Pro', 'Tekton Pro Cond', 'Tekton Pro Ext', 'Telugu MN', 'Telugu MN Bold', 'Telugu Sangam MN', 'Telugu Sangam MN Bold', 'Tempus Sans ITC', 'Terminal', 'Terminator Two', 'Thonburi', 'Thonburi Bold', 'Tibetan Machine Uni', 'Times', 'Times Bold', 'Times New Roman', 'Times New Roman Baltic', 'Times New Roman Bold', 'Times New Roman Italic', 'Times Roman', 'Tlwg Mono', 'Tlwg Typewriter', 'Tlwg Typist', 'Tlwg Typo', 'TlwgMono', 'TlwgTypewriter', 'Toledo', 'Traditional Arabic', 'Trajan Pro', 'Trattatello', 'Trebuchet MS', 'Trebuchet MS Bold', 'Tunga', 'Tw Cen MT', 'Tw Cen MT Bold', 'Tw Cen MT Italic', 'URW Bookman L', 'URW Chancery L', 'URW Gothic L', 'URW Palladio L', 'Ubuntu', 'Ubuntu Condensed', 'Ubuntu Mono', 'Ukai', 'Ume Gothic', 'Ume Mincho', 'Ume P Gothic', 'Ume P Mincho', 'Ume UI Gothic', 'Uming', 'Umpush', 'UnBatang', 'UnDinaru', 'UnDotum', 'UnGraphic', 'UnGungseo', 'UnPilgi', 'Untitled1', 'Urdu Typesetting', 'Uroob', 'Utkal', 'Utopia', 'Utsaah', 'Valken', 'Vani', 'Vemana2000', 'Verdana', 'Verdana Bold', 'Vijaya', 'Viner Hand ITC', 'Vivaldi', 'Vivian', 'Vladimir Script', 'Vrinda', 'Waree', 'Waseem', 'Waverly', 'Webdings', 'WenQuanYi Bitmap Song', 'WenQuanYi Micro Hei', 'WenQuanYi Micro Hei Mono', 'WenQuanYi Zen Hei', 'Whimsy TT', 'Wide Latin', 'Wingdings', 'Wingdings 2', 'Wingdings 3', 'Woodcut', 'X-Files', 'Year supply of fairy cakes', 'Yu Gothic', 'Yu Mincho', 'Yuppy SC', 'Yuppy SC Regular', 'Yuppy TC', 'Yuppy TC Regular', 'Zapf Dingbats', 'Zapfino', 'Zawgyi-One', 'gargi', 'lklug', 'mry_KacstQurn', 'ori1Uni']; //  		var fonts = ["Times", "Times New Roman", "tata", "toto"];
+        const d = new Detector();
+        var detected = '';
+        fonts.forEach((font) => {
+            if (d.detect(font)) detected += font + ',';
+        });
+       // console.log(performance.now() - t0);
+        return detected;
+      }
+
+      function blending() {
+        const blendingModes = ['screen', 'multiply', 'lighter'];
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        for (const mode of blendingModes) {
+        try {
+            ctx.globalCompositeOperation = mode;
+        } catch (error) {
+            return false;
+        }
+        }
+        return true;
+      }
+
+      function checkOS(res) {
+        if (res.os == null || res.os == undefined) return '-';
+        const Desktop = ['AIX', 'Amiga OS', 'Arch', 'BeOS', 'CentOS', 'Chromium OS', 'Contiki', 'Fedora', 'FreeBSD', 'Debian', 'Deepin', 'DragonFly', 'elementary OS',
+    'Gentoo', 'GhostBSD', 'GNU', 'Haiku', 'HP-UX', 'Hurd', 'Joli', 'Linpus', 'Linux', 'Linspire', 'Mageia', 'Mandriva', 'Manjaro', 'MeeGo', 'Minix', 'Mint', 'Morph OS', 
+    'NetBSD', 'OpenBSD', 'OpenVMS', 'OS/2', 'PC-BSD', 'PCLinuxOS', 'Plan9', 'RedHat', 'RISC OS', 'Sabayon', 'SerenityOS', 'Slackware', 'Solaris', 'SUSE', 'Ubuntu',
+    'VectorLinux', 'Zenwalk'];
+        const mobile = ['Android', 'Android-x86', 'Bada', 'BlackBerry', 'Firefox OS', 'Fuchsia', 'HarmonyOS', 'iOS', 'KaiOS', 'Maemo', 'QNX', 'RIM Tablet OS',
+    'Sailfish', 'Series40', 'Symbian', 'Tizen', 'WebOS', 'Windows Phone', 'Windows Mobile'];
+        if (Desktop.includes(res.os.name)) {
+            return 0;
+        } else if (mobile.includes(res.os.name)) {
+            return 6;
+        } else {
+            return 7;
+        }
+      }
+
+      function cryptoSupport() {
+        if (!('crypto' in window)) {
+          // Crypto API is not available at all
+          return false;
+        }
+      
+        try {
+          const array = new Uint32Array(10);
+          crypto.getRandomValues(array);
+        } catch (error) {
+          return false;
+        }
+      
+        // Check for specific properties and methods for more comprehensive support:
+        return {
+          subtle: typeof crypto.subtle === 'object' ,
+          random: typeof crypto.getRandomValues === 'function'
+        };
+      }
+
+      function webGL() {
+            var canvas, ctx, width = 256, height = 128;
+          canvas = document.createElement("canvas");
+          canvas.width = width,
+          canvas.height = height,
+          ctx = canvas.getContext("webgl2") || canvas.getContext("experimental-webgl2") || canvas.getContext("webgl") || canvas.getContext("experimental-webgl") || canvas.getContext("moz-webgl");
+          if (ctx == null || ctx == undefined) return '';
+            try {
+                var f = "attribute vec2 attrVertex;varying vec2 varyinTexCoordinate;uniform vec2 uniformOffset;void main(){varyinTexCoordinate=attrVertex+uniformOffset;gl_Position=vec4(attrVertex,0,1);}";
+                var g = "precision mediump float;varying vec2 varyinTexCoordinate;void main() {gl_FragColor=vec4(varyinTexCoordinate,0,1);}";
+                var h = ctx.createBuffer();
+        
+                ctx.bindBuffer(ctx.ARRAY_BUFFER, h);
+        
+                var i = new Float32Array([-.2, -.9, 0, .4, -.26, 0, 0, .7321, 0]);
+        
+                ctx.bufferData(ctx.ARRAY_BUFFER, i, ctx.STATIC_DRAW), h.itemSize = 3, h.numItems = 3;
+        
+                var j = ctx.createProgram();
+                var k = ctx.createShader(ctx.VERTEX_SHADER);
+        
+                ctx.shaderSource(k, f);
+                ctx.compileShader(k);
+        
+                var l = ctx.createShader(ctx.FRAGMENT_SHADER);
+        
+                ctx.shaderSource(l, g);
+                ctx.compileShader(l);
+                ctx.attachShader(j, k);
+                ctx.attachShader(j, l);
+                ctx.linkProgram(j);
+                ctx.useProgram(j);
+        
+                j.vertexPosAttrib = ctx.getAttribLocation(j, "attrVertex");
+                j.offsetUniform = ctx.getUniformLocation(j, "uniformOffset");
+        
+                ctx.enableVertexAttribArray(j.vertexPosArray);
+                ctx.vertexAttribPointer(j.vertexPosAttrib, h.itemSize, ctx.FLOAT, !1, 0, 0);
+                ctx.uniform2f(j.offsetUniform, 1, 1);
+                ctx.drawArrays(ctx.TRIANGLE_STRIP, 0, h.numItems);
+        
+            }
+            catch (e) {	}
+        
+            var m = "";
+        
+          var n = new Uint8Array(width * height * 4);
+          ctx.readPixels(0, 0, width, height, ctx.RGBA, ctx.UNSIGNED_BYTE, n);
+          m = JSON.stringify(n).replace(/,?"[0-9]+":/g, "");
+          return XXH64(m, 0xA3FC ).toString(16);
+      }
+
+async function webGLParameters() {
+        // Based on and inspired by https://github.com/CesiumGS/webglreport
+
+// https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Constants
+const WebGLConstants = [
+    'ALIASED_LINE_WIDTH_RANGE',
+    'ALIASED_POINT_SIZE_RANGE',
+    'ALPHA_BITS',
+    'BLUE_BITS',
+    'DEPTH_BITS',
+    'GREEN_BITS',
+    'MAX_COMBINED_TEXTURE_IMAGE_UNITS',
+    'MAX_CUBE_MAP_TEXTURE_SIZE',
+    'MAX_FRAGMENT_UNIFORM_VECTORS',
+    'MAX_RENDERBUFFER_SIZE',
+    'MAX_TEXTURE_IMAGE_UNITS',
+    'MAX_TEXTURE_SIZE',
+    'MAX_VARYING_VECTORS',
+    'MAX_VERTEX_ATTRIBS',
+    'MAX_VERTEX_TEXTURE_IMAGE_UNITS',
+    'MAX_VERTEX_UNIFORM_VECTORS',
+    'MAX_VIEWPORT_DIMS',
+    'RED_BITS',
+    'RENDERER',
+    'SHADING_LANGUAGE_VERSION',
+    'STENCIL_BITS',
+    'VERSION'
+]
+
+const WebGL2Constants = [
+    'MAX_VARYING_COMPONENTS',
+    'MAX_VERTEX_UNIFORM_COMPONENTS',
+    'MAX_VERTEX_UNIFORM_BLOCKS',
+    'MAX_VERTEX_OUTPUT_COMPONENTS',
+    'MAX_PROGRAM_TEXEL_OFFSET',
+    'MAX_3D_TEXTURE_SIZE',
+    'MAX_ARRAY_TEXTURE_LAYERS',
+    'MAX_COLOR_ATTACHMENTS',
+    'MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS',
+    'MAX_COMBINED_UNIFORM_BLOCKS',
+    'MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS',
+    'MAX_DRAW_BUFFERS',
+    'MAX_ELEMENT_INDEX',
+    'MAX_FRAGMENT_INPUT_COMPONENTS',
+    'MAX_FRAGMENT_UNIFORM_COMPONENTS',
+    'MAX_FRAGMENT_UNIFORM_BLOCKS',
+    'MAX_SAMPLES',
+    'MAX_SERVER_WAIT_TIMEOUT',
+    'MAX_TEXTURE_LOD_BIAS',
+    'MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS',
+    'MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS',
+    'MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS',
+    'MAX_UNIFORM_BLOCK_SIZE',
+    'MAX_UNIFORM_BUFFER_BINDINGS',
+    'MIN_PROGRAM_TEXEL_OFFSET',
+    'UNIFORM_BUFFER_OFFSET_ALIGNMENT'
+]
+
+const Categories = {
+    'uniformBuffers': [
+        'MAX_UNIFORM_BUFFER_BINDINGS',
+        'MAX_UNIFORM_BLOCK_SIZE',
+        'UNIFORM_BUFFER_OFFSET_ALIGNMENT',
+        'MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS',
+        'MAX_COMBINED_UNIFORM_BLOCKS',
+        'MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS',
+    ],
+    'debugRendererInfo': [
+        'UNMASKED_VENDOR_WEBGL',
+        'UNMASKED_RENDERER_WEBGL',
+    ],
+    'fragmentShader': [
+        'MAX_FRAGMENT_UNIFORM_VECTORS',
+        'MAX_TEXTURE_IMAGE_UNITS',
+        'MAX_FRAGMENT_INPUT_COMPONENTS',
+        'MAX_FRAGMENT_UNIFORM_COMPONENTS',
+        'MAX_FRAGMENT_UNIFORM_BLOCKS',
+        'FRAGMENT_SHADER_BEST_FLOAT_PRECISION',
+        'MIN_PROGRAM_TEXEL_OFFSET',
+        'MAX_PROGRAM_TEXEL_OFFSET',
+    ],
+    'frameBuffer': [
+        'MAX_DRAW_BUFFERS',
+        'MAX_COLOR_ATTACHMENTS',
+        'MAX_SAMPLES',
+        'RGBA_BITS',
+        'DEPTH_STENCIL_BITS',
+        'MAX_RENDERBUFFER_SIZE',
+        'MAX_VIEWPORT_DIMS'
+    ],
+    'rasterizer': [
+        'ALIASED_LINE_WIDTH_RANGE',
+        'ALIASED_POINT_SIZE_RANGE',
+    ],
+    'textures': [
+        'MAX_TEXTURE_SIZE',
+        'MAX_CUBE_MAP_TEXTURE_SIZE',
+        'MAX_COMBINED_TEXTURE_IMAGE_UNITS',
+        'MAX_TEXTURE_MAX_ANISOTROPY_EXT',
+        'MAX_3D_TEXTURE_SIZE',
+        'MAX_ARRAY_TEXTURE_LAYERS',
+        'MAX_TEXTURE_LOD_BIAS',
+    ],
+    'transformFeedback': [
+        'MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS',
+        'MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS',
+        'MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS',
+    ],
+    'vertexShader': [
+        'MAX_VARYING_VECTORS',
+        'MAX_VERTEX_ATTRIBS',
+        'MAX_VERTEX_TEXTURE_IMAGE_UNITS',
+        'MAX_VERTEX_UNIFORM_VECTORS',
+        'MAX_VERTEX_UNIFORM_COMPONENTS',
+        'MAX_VERTEX_UNIFORM_BLOCKS',
+        'MAX_VERTEX_OUTPUT_COMPONENTS',
+        'MAX_VARYING_COMPONENTS',
+        'VERTEX_SHADER_BEST_FLOAT_PRECISION',
+    ],
+    'webGLContextInfo': [
+        'CONTEXT',
+        'ANTIALIAS',
+        'DIRECT_3D',
+        'MAJOR_PERFORMANCE_CAVEAT',
+        'RENDERER',
+        'SHADING_LANGUAGE_VERSION',
+        'VERSION',
+    ],
+}
+
+/* parameter helpers */
+// https://developer.mozilla.org/en-US/docs/Web/API/EXT_texture_filter_anisotropic
+const getMaxAnisotropy = (context) => {
+    try {
+        const extension = (
+            context.getExtension('EXT_texture_filter_anisotropic') ||
+            context.getExtension('WEBKIT_EXT_texture_filter_anisotropic') ||
+            context.getExtension('MOZ_EXT_texture_filter_anisotropic')
+        )
+        return context.getParameter(extension.MAX_TEXTURE_MAX_ANISOTROPY_EXT)
+    } catch (error) {
+        console.error(error)
+        return undefined
+    }
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_draw_buffers
+const getMaxDrawBuffers = (context) => {
+    try {
+        const extension = (
+            context.getExtension('WEBGL_draw_buffers') ||
+            context.getExtension('WEBKIT_WEBGL_draw_buffers') ||
+            context.getExtension('MOZ_WEBGL_draw_buffers')
+        )
+        return context.getParameter(extension.MAX_DRAW_BUFFERS_WEBGL)
+    } catch (error) {
+        return undefined
+    }
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/API/WebGLShaderPrecisionFormat/precision
+// https://developer.mozilla.org/en-US/docs/Web/API/WebGLShaderPrecisionFormat/rangeMax
+// https://developer.mozilla.org/en-US/docs/Web/API/WebGLShaderPrecisionFormat/rangeMin
+const getShaderData = (shader) => {
+    const shaderData = {}
+    try {
+        for (const prop in shader) {
+            const shaderPrecisionFormat = shader[prop]
+            shaderData[prop] = {
+                precision: shaderPrecisionFormat.precision,
+                rangeMax: shaderPrecisionFormat.rangeMax,
+                rangeMin: shaderPrecisionFormat.rangeMin
+            }
+        }
+        return shaderData
+    } catch (error) {
+        return undefined
+    }
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getShaderPrecisionFormat
+const getShaderPrecisionFormat = (context, shaderType) => {
+    const props = ['LOW_FLOAT', 'MEDIUM_FLOAT', 'HIGH_FLOAT']
+    const precisionFormat = {}
+    try {
+        props.forEach(prop => {
+            precisionFormat[prop] = context.getShaderPrecisionFormat(context[shaderType], context[prop])
+            return
+        })
+        return precisionFormat
+    } catch (error) {
+        return undefined
+    }
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_debug_renderer_info
+const getUnmasked = (context, constant) => {
+    try {
+        const extension = context.getExtension('WEBGL_debug_renderer_info')
+        const unmasked = context.getParameter(extension[constant])
+        return unmasked
+    } catch (error) {
+        return undefined
+    }
+}
+
+// Takes the parameter object and generate a fingerprint of sorted numeric values
+function getNumericValues(parameters) {
+  if (!parameters) return
+  return [
+    ...new Set(Object.values(parameters)
+      .filter((val) => val && typeof val != 'string')
+      .flat()
+      .map((val) => Number(val) || 0)),
+  ].sort((a, b) => (a - b))
+}
+
+// Highlight common GPU brands
+function getGpuBrand(gpu) {
+  if (!gpu) return
+  const gpuBrandMatcher = /(adreno|amd|apple|intel|llvm|mali|microsoft|nvidia|parallels|powervr|samsung|swiftshader|virtualbox|vmware)/i
+
+  const brand = (
+    /radeon/i.test(gpu) ? 'AMD' :
+    /geforce/i.test(gpu) ? 'NVIDIA' :
+    ( (gpuBrandMatcher.exec(gpu) || [])[0] || 'Other' )
+  )
+
+  return brand
+}
+
+/* get WebGLRenderingContext or WebGL2RenderingContext */
+// https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext
+// https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext
+function getWebGL(contextType) {
+    const errors = []
+    let data = {}
+    const isWebGL = /^(experimental-)?webgl$/ 
+    const isWebGL2 = /^(experimental-)?webgl2$/
+    const supportsWebGL = isWebGL.test(contextType) && 'WebGLRenderingContext' in window
+    const supportsWebGL2 = isWebGL2.test(contextType) && 'WebGLRenderingContext' in window
+    
+    // detect support
+    if (!supportsWebGL && !supportsWebGL2) {
+        errors.push('not supported')
+        return [data, errors]
+    }
+
+    // get canvas context
+    let canvas
+    let context
+    let hasMajorPerformanceCaveat
+    try {
+        canvas = document.createElement('canvas')
+        context = canvas.getContext(contextType, { failIfMajorPerformanceCaveat: true })
+        if (!context) {
+            hasMajorPerformanceCaveat = true
+            context = canvas.getContext(contextType)
+            if (!context) {
+                throw new Error(`context of type ${typeof context}`)
+            }
+        }
+    } catch (err) {
+        console.error(err)
+
+        errors.push('context blocked')
+        return [data, errors]
+    }
+
+    // get supported extensions
+    // https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getSupportedExtensions
+    // https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Using_Extensions
+    let webGLExtensions
+    try {
+        webGLExtensions = context.getSupportedExtensions()
+    } catch (error) {
+        console.error(error)
+        errors.push('extensions blocked')
+    }
+
+    // get parameters
+    let parameters
+    try {
+        const VERTEX_SHADER = getShaderData(getShaderPrecisionFormat(context, 'VERTEX_SHADER'))
+        const FRAGMENT_SHADER = getShaderData(getShaderPrecisionFormat(context, 'FRAGMENT_SHADER'))
+
+        parameters = {
+            ANTIALIAS: context.getContextAttributes().antialias,
+            CONTEXT: contextType,
+            MAJOR_PERFORMANCE_CAVEAT: hasMajorPerformanceCaveat,
+            MAX_TEXTURE_MAX_ANISOTROPY_EXT: getMaxAnisotropy(context),
+            MAX_DRAW_BUFFERS_WEBGL: getMaxDrawBuffers(context),
+            VERTEX_SHADER,
+            VERTEX_SHADER_BEST_FLOAT_PRECISION: Object.values(VERTEX_SHADER.HIGH_FLOAT),
+            FRAGMENT_SHADER,
+            FRAGMENT_SHADER_BEST_FLOAT_PRECISION: Object.values(FRAGMENT_SHADER.HIGH_FLOAT),
+            UNMASKED_VENDOR_WEBGL: getUnmasked(context, 'UNMASKED_VENDOR_WEBGL'),
+            UNMASKED_RENDERER_WEBGL: getUnmasked(context, 'UNMASKED_RENDERER_WEBGL')
+        }
+        
+        const glConstants =  [...WebGLConstants, ...(supportsWebGL2 ? WebGL2Constants : [])]
+        glConstants.forEach(key => {
+            const result = context.getParameter(context[key])
+            const typedArray = result && (
+                result.constructor === Float32Array ||
+                result.constructor === Int32Array
+            )
+            parameters[key] = typedArray ? [...result] : result
+        })
+
+        parameters.RGBA_BITS = [
+            parameters.RED_BITS,
+            parameters.GREEN_BITS,
+            parameters.BLUE_BITS,
+            parameters.ALPHA_BITS,
+        ]
+
+        parameters.DEPTH_STENCIL_BITS = [
+            parameters.DEPTH_BITS,
+            parameters.STENCIL_BITS,
+        ]
+
+        parameters.DIRECT_3D = /Direct3D|D3D(\d+)/.test(parameters.UNMASKED_RENDERER_WEBGL)
+
+    } catch (error) {
+        console.error(error)
+        errors.push('parameters blocked')
+    }
+    const gpu = String([parameters.UNMASKED_VENDOR_WEBGL, parameters.UNMASKED_RENDERER_WEBGL])
+    const gpuBrand = getGpuBrand(gpu)
+
+    // Structure parameter data
+    let components = {}
+    if (parameters) {
+        Object.keys(Categories).forEach((name) => {
+            const componentData = Categories[name].reduce((acc, key) => {
+                if (parameters[key] !== undefined) {
+                    acc[key] = parameters[key]
+                }
+                return acc
+            }, {})
+
+            // Only compile if the data exists
+            if (Object.keys(componentData).length) {
+                components[name] = componentData
+            }
+        }) 
+    }
+
+    data = {
+        gpuHash: !parameters ? undefined : [gpuBrand,...getNumericValues(parameters)].join(':'),
+        gpu,
+        gpuBrand,
+        ...components,
+        webGLExtensions
+    }
+
+    return [data, errors]
+}
+
+const value = await Promise.all([
+    getWebGL('webgl'),
+    getWebGL('webgl2'),
+    getWebGL('experimental-webgl'),
+]).then((response) => {
+    const [webGL, webGL2, experimentalWebGL] = response
+
+    // Extract both data and errors
+    const [webGLData, webGLErrors] = webGL
+    const [webGL2Data, webGL2Errors] = webGL2
+    const [experimentalWebGLData, experimentalWebGLErrors] = experimentalWebGL
+
+    // Show the data
+    /*
+    console.log('WebGLRenderingContext: ', webGLData)
+    console.log('WebGL2RenderingContext: ', webGL2Data)
+    console.log('Experimental: ', experimentalWebGLData)
+    */
+    return(XXH64(JSON.stringify([webGLData, webGL2Data, experimentalWebGLData]), 0xA3FC ).toString(16));
+    /*
+    webGLParma.push(XXH64(JSON.stringify(webGLData), 0xA3FC ).toString(16));
+    webGLParma.push(XXH64(JSON.stringify(webGL2Data), 0xA3FC ).toString(16));
+    webGLParma.push(XXH64(JSON.stringify(experimentalWebGLData), 0xA3FC ).toString(16));
+    */
+}).catch(error => {
+    console.error(error)
+})
+return value;
+      }
+  
+     async function id(params) {
+        const xhr = new XMLHttpRequest();
+        var recivedTime = 0;
+        var sentTime = null;
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+              if (xhr.status === 200) {
+                  recivedTime = performance.now();
+              }
+            }
+          };
+          
+          xhr.open('POST', 'https://test.deviceid.io/index.json');
+      
+          xhr.setRequestHeader("Content-Type", "text/plain");
+          sentTime = performance.now()
+          xhr.send(JSON.stringify({id: stored_id}));
+        return new Promise(async (resolve, reject) => {
+        const platform = window.navigator.platform;
+        var doNotTrack = "";
+if (window.navigator.doNotTrack != null && window.navigator.doNotTrack != "unspecified"){
+    if(window.navigator.doNotTrack == "1" || window.navigator.doNotTrack == "yes"){
+        doNotTrack = "yes";
+    } else {
+        doNotTrack = "no";
+    }
+} else {
+	doNotTrack = "NC";
+}
+const timezone = new Date().getTimezoneOffset();
+const resolution = window.screen.width+"x"+window.screen.height;
+    var cnv = createCanvas();
+    const cnv1 = createCanvas();
+    if (cnv1 != cnv) cnv = undefined;
+    const uapRes = uap.getResult();
+    const prv = await detectIncognito();
+    var device = 0;
+    const arch = uapRes.cpu.architecture;
+    if (uapRes.os != undefined && uapRes.os != null && uapRes.os.name == 'macOS' || uapRes.device.model == 'Macintosh') {
+        device = 1; 
+    } else if (uapRes.device != null && uapRes.device != undefined && uapRes.device.vendor == 'Apple') {
+        if (uapRes.os.name == 'iOS') {
+            device = 3;
+        } else if (uap.os.name == 'watchOS') {
+            device = 2;
+        } else {
+            device = 1
+        }
+    } else if (arch == 'amd64' || arch == 'ia32' || arch == 'ia64' || arch == 'pa-risc' || arch == 'sparc' || arch == 'sparch64') { // Desktop
+        device = 0;
+    } else if (arch == '68k') { // mobile
+        device = 6;
+    } else if (arch == 'arm64') { // ipad / iphone
+        device = 3;
+    } else if (arch == 'ppc') { // mac
+        device = 1;
+    } else if (arch == 'avr' || arch == 'armhf' || arch == 'irix' || arch == 'irix64' || arch == 'mips' || arch == 'mips64') { // something weird
+        device = 7;
+    } else { // cpu arch undefined
+        if (uapRes.device.type == undefined) {
+            if (uapRes.os.name == undefined) {
+                device = 7;                
+            } else {
+                device = checkOS(uapRes);
+            }
+        } else {
+            if (uapRes.device == null || uapRes.device == undefined) {
+                device = 0;
+            } else {
+            const type = uapRes.device.type;
+            if (type == 'mobile') {
+                device = 6
+            } else if (type == 'tablet') {
+                device = 5;
+            } else if (type == 'werable') {
+                device = 2;
+            } else if (uapRes.os != null && uapRes.os != undefined) {
+                if (uapRes.os.name == undefined) {
+                    device = 7;
+                } else {
+                    device = checkOS(uapRes);
+                }
+            }
+        }
+        }
+    } 
+    const obj = {
+        a: XXH64(await getFonts(), 0xA3FC ).toString(16), // fonts - 2, 5
+        c: getMimeTypes(),
+        b: cryptoSupport(), // crypto - 3, 1
+        d: blending(), // blending - 1, 2
+        g: await getAudio(), // audio - 3, 7
+        i: getOscpu(), // osCPU - 1, 1
+        j: getLanguages(), // languages - 2, 4
+        k: colorDepth(), // 1, 3
+        l: navigator.deviceMemory, // 1, 2
+        m: resolution, // 1, 3
+        n: getHardwareConcurrency(), // 1, 3
+        o: timezone, // 1, 2
+        t: getNavigatorCpuClass(), // 1, 2
+        v: XXH64(getPluginsUsingMimeTypes(), 0xA3FC ).toString(16), // 2, 5
+        w: XXH64(cnv, 0xA3FC ).toString(16), // 2, 8
+        x: getTouchSupport(), // 2, 1
+        y: getVendor(), // 1, 2
+        z: getVendorSub(), // ~ flavors - 1, 2
+        bb: colorGamut(), // 2, 1
+        cc: invertedColors(), // 1, 1
+        dd: forcedColors(), // 1, 1
+        ee: monochrome(), // 1, 1
+        ff: contrast(), // 2, 1
+        gg: reducedMotion(), // 3, 1
+        hh: HDR(), // 2, 1
+        ii: XXH64(getMathsConstants(), 0xA3FC ).toString(16), // 3, 3
+        jj: await webGLParameters(), // 3, 7
+        ll: getArch(), // 3, 1
+        a0: isTouchDevice(), // 1, 1
+        b0: reducedTransparency(), // 2, 1
+        b2: webGL(), // 3, 9
+    }
+
+    const mini_print = {
+        a: obj.a,
+        d: obj.g,
+        e: obj.w,
+        f: obj.ii,
+        g: obj.jj,
+        h: obj.b2
+    }
+
+    obj['b1'] = XXH64( JSON.stringify(mini_print), 0xCAFEBABE ).toString(16);
+    obj['zz'] = XXH64( JSON.stringify(obj), 0xCAFEBABE ).toString(16);
+    obj['a2'] = getAppCodeName();
+    obj['a3'] = getAppName();
+    obj['a4'] = getAppVersion();
+    obj['a5'] = getProduct(); // 1, 1
+    obj['a6'] = getProductSub(); // 1, 2
+    obj['a7'] = XXH64(getNavigatorPrototype(), 0xA3FC ).toString(16); // 1, 4
+    obj['a9'] = getBuildId();
+    obj['b1'] = doNotTrack;
+    obj['kk'] = navigator.pdfViewerEnabled;
+    obj['aa'] = navigator.cookieEnabled;
+    obj['p'] = sessionStorage();
+    obj['q'] = getLocalStorage();
+    obj['r'] = indexedDB();
+    obj['s'] = Boolean(window.openDatabase);
+    obj['ua'] = navigator.userAgent;
+        const end = performance.now();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                  const timing = performance.now() - end;
+                  const buff = Buffer.from(xhr.responseText, 'base64');
+                  const decipher = crypto.createDecipher('aes-256-cbc', key, iv);
+                  const decoded = decipher.update(buff.toString('utf8'), 'hex', 'utf8') +
+                  decipher.final('utf8')
+                  const parsed = JSON.parse(decoded);
+                  if (parsed['code'] != null) {
+                      localStorage.setItem('c:GkK?_5eVdQdiQT0Fb?', parsed['code']);
+                      setCookie('-BAL4_z*-wQ=6TYqCA!U', parsed['code'], {secure: true, 'expires': 3600});
+                  }
+                  delete parsed['code'];
+                  parsed['private'] = prv;
+                  parsed['platform'] = uapRes;
+                  parsed['adblock'] = obj.c;
+                  parsed['dev'] = device;
+                  resolve(parsed);
+                  const xhr1 = new XMLHttpRequest();
+                  xhr1.open('POST', url + '/updateTime');
+                  xhr1.setRequestHeader("Content-Type", "text/plain");
+                  xhr1.send(JSON.stringify({timing, visit_id: parsed['visit_id']}));
+                  } else {
+                      reject(xhr.responseText);
+                    }
+                }
+            }
+            xhr.open('POST', url + '/id');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + loaded);
+            xhr.setRequestHeader("Content-Type", "text/plain");
+
+            var res = {tls: stored_id, dev: device, url: window.location.href, platform, private: prv, print: obj, old, cookie: cookieStored, start: sentTime, end, local: obj.q};
+            if (params != undefined) {
+                if (params.request_id != undefined) {res['id'] = params.request_id}
+                if (params.data != undefined) {res['tag'] = params.data}
+            }
+            xhr.send(JSON.stringify(res));
+    });
+}
+
+ function load(data) {
+     //localStorage.removeItem('c:GkK?_5eVdQdiQT0Fb?');
+    // setCookie('-BAL4_z*-wQ=6TYqCA!U', '', {secure: true, 'expires': 3600});
+     stored_id = localStorage.getItem('deviceID_identifier');
+     if (stored_id == null || stored_id == undefined) {
+         stored_id = makeid(20);
+         localStorage.setItem('deviceID_identifier', stored_id);
+     }
+ 
+     return new Promise(async (resolve, reject) => {
+        if (typeof data === 'object') {
+         if (!("apiKey" in data)) {
+             reject('please provide an apiKey');
+             return;
+         } else if (!("secret" in data)) {
+             reject('please provide a secret key');
+             return;
+         }
+        } else {
+            reject('please provide data as an object to the load function');
+        }
+         const xhr = new XMLHttpRequest();
+         xhr.onreadystatechange = () => {
+             if (xhr.readyState === XMLHttpRequest.DONE) {
+                 if (xhr.status === 200) {
+                   loaded = xhr.responseText;
+                   key = sha512(data.secret).substring(0, 32);
+                   if (typeof(Storage) !== "undefined") {
+                     old = localStorage.getItem('c:GkK?_5eVdQdiQT0Fb?');
+                     if (navigator.cookieEnabled) {
+                         cookieStored = getCookie('-BAL4_z*-wQ=6TYqCA!U');
+                     }
+                   } 
+                   resolve(true);
+                   return;
+                 } else {
+                     reject(xhr.responseText);
+                     return;
+                 }
+             }
+             }
+         xhr.open('POST', url + '/load');
+         xhr.setRequestHeader("Content-Type", "text/plain");
+         xhr.send(JSON.stringify({key: encodeURIComponent(data.apiKey)}));
+     });
+ }
+
+ function getCookie(cname) {
+    const name = cname + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return null;
+}
+
+function setCookie(name, value, options = {}) {
+
+options = {
+  path: '/',
+  // add other defaults here if necessary
+  ...options
+};
+
+if (options.expires instanceof Date) {
+  options.expires = options.expires.toUTCString();
+}
+
+let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+for (let optionKey in options) {
+  updatedCookie += "; " + optionKey;
+  let optionValue = options[optionKey];
+  if (optionValue !== true) {
+    updatedCookie += "=" + optionValue;
+  }
+}
+
+document.cookie = updatedCookie;
+}
+
+
