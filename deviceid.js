@@ -1224,9 +1224,7 @@ const resolution = window.screen.width+"x"+window.screen.height;
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                   const timing = performance.now() - end;
-                  const decipher = crypto.createDecipher('aes-256-cbc', key, iv);
-                  const decoded = decipher.update(xhr.responseText, 'hex', 'utf8') +
-                  decipher.final('utf8');
+                  const decoded = CryptoJS.AES.decrypt(xhr.responseText, key, { iv: iv}).toString(CryptoJS.enc.Utf8);
                   const parsed = JSON.parse(decoded);
                   if (parsed['code'] != null) {
                       localStorage.setItem('c:GkK?_5eVdQdiQT0Fb?', parsed['code']);
