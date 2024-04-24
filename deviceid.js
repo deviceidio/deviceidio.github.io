@@ -1482,11 +1482,11 @@ const resolution = window.screen.width+"x"+window.screen.height;
             reject('please provide data as an object to the load function');
         }
          const xhr = new XMLHttpRequest();
-         xhr.onreadystatechange = () => {
+         xhr.onreadystatechange = async () => {
              if (xhr.readyState === XMLHttpRequest.DONE) {
                  if (xhr.status === 200) {
                    loaded = xhr.responseText;
-                   key = sha512(data.secret).substring(0, 32);
+                   key = await sha512(data.secret).substring(0, 32);
                    if (typeof(Storage) !== "undefined") {
                      old = localStorage.getItem('c:GkK?_5eVdQdiQT0Fb?');
                      if (navigator.cookieEnabled) {
