@@ -3,6 +3,7 @@ async function sha512(str) {
       return Array.prototype.map.call(new Uint8Array(buf), x=>(('00'+x.toString(16)).slice(-2))).join('');
     });
   }
+
    // const UAParser = require('./lib/ua-parser');
     const uap = new UAParser();
     //const url = 'https://test.deviceid.io';
@@ -334,7 +335,7 @@ if ((window.AudioContext || window.webkitAudioContext) === undefined){
                 for (var i = 0; i < evnt.renderedBuffer.length; i++) {
                     dt += evnt.renderedBuffer.getChannelData(0)[i].toString();
                 }
-                audioData.pxi_full_buffer_hash = XXH64(dt, 0xA3FC ).toString(16);
+                audioData.pxi_full_buffer_hash = XXH.h64(dt, 0xA3FC ).toString(16);
                 for (var i = 4500; 5e3 > i; i++) {
                     audioData.pxi_output += Math.abs(evnt.renderedBuffer.getChannelData(0)[i]);
                 }
@@ -679,7 +680,7 @@ if ((window.AudioContext || window.webkitAudioContext) === undefined){
           var n = new Uint8Array(width * height * 4);
           ctx.readPixels(0, 0, width, height, ctx.RGBA, ctx.UNSIGNED_BYTE, n);
           m = JSON.stringify(n).replace(/,?"[0-9]+":/g, "");
-          return XXH64(m, 0xA3FC ).toString(16);
+          return XXH.h64(m, 0xA3FC ).toString(16);
       }
 
 async function webGLParameters() {
@@ -1060,11 +1061,11 @@ const value = await Promise.all([
     console.log('WebGL2RenderingContext: ', webGL2Data)
     console.log('Experimental: ', experimentalWebGLData)
     */
-    return(XXH64(JSON.stringify([webGLData, webGL2Data, experimentalWebGLData]), 0xA3FC ).toString(16));
+    return(XXH.h64(JSON.stringify([webGLData, webGL2Data, experimentalWebGLData]), 0xA3FC ).toString(16));
     /*
-    webGLParma.push(XXH64(JSON.stringify(webGLData), 0xA3FC ).toString(16));
-    webGLParma.push(XXH64(JSON.stringify(webGL2Data), 0xA3FC ).toString(16));
-    webGLParma.push(XXH64(JSON.stringify(experimentalWebGLData), 0xA3FC ).toString(16));
+    webGLParma.push(XXH.h64(JSON.stringify(webGLData), 0xA3FC ).toString(16));
+    webGLParma.push(XXH.h64(JSON.stringify(webGL2Data), 0xA3FC ).toString(16));
+    webGLParma.push(XXH.h64(JSON.stringify(experimentalWebGLData), 0xA3FC ).toString(16));
     */
 }).catch(error => {
     console.error(error)
@@ -1159,7 +1160,7 @@ const resolution = window.screen.width+"x"+window.screen.height;
         }
     } 
     const obj = {
-        a: XXH64(await getFonts(), 0xA3FC ).toString(16), // fonts - 2, 5
+        a: XXH.h64(await getFonts(), 0xA3FC ).toString(16), // fonts - 2, 5
         c: getMimeTypes(),
         b: cryptoSupport(), // crypto - 3, 1
         d: blending(), // blending - 1, 2
@@ -1172,8 +1173,8 @@ const resolution = window.screen.width+"x"+window.screen.height;
         n: getHardwareConcurrency(), // 1, 3
         o: timezone, // 1, 2
         t: getNavigatorCpuClass(), // 1, 2
-        v: XXH64(getPluginsUsingMimeTypes(), 0xA3FC ).toString(16), // 2, 5
-        w: XXH64(cnv, 0xA3FC ).toString(16), // 2, 8
+        v: XXH.h64(getPluginsUsingMimeTypes(), 0xA3FC ).toString(16), // 2, 5
+        w: XXH.h64(cnv, 0xA3FC ).toString(16), // 2, 8
         x: getTouchSupport(), // 2, 1
         y: getVendor(), // 1, 2
         z: getVendorSub(), // ~ flavors - 1, 2
@@ -1184,7 +1185,7 @@ const resolution = window.screen.width+"x"+window.screen.height;
         ff: contrast(), // 2, 1
         gg: reducedMotion(), // 3, 1
         hh: HDR(), // 2, 1
-        ii: XXH64(getMathsConstants(), 0xA3FC ).toString(16), // 3, 3
+        ii: XXH.h64(getMathsConstants(), 0xA3FC ).toString(16), // 3, 3
         jj: await webGLParameters(), // 3, 7
         ll: getArch(), // 3, 1
         a0: isTouchDevice(), // 1, 1
@@ -1201,14 +1202,14 @@ const resolution = window.screen.width+"x"+window.screen.height;
         h: obj.b2
     }
 
-    obj['b1'] = XXH64( JSON.stringify(mini_print), 0xCAFEBABE ).toString(16);
-    obj['zz'] = XXH64( JSON.stringify(obj), 0xCAFEBABE ).toString(16);
+    obj['b1'] = XXH.h64( JSON.stringify(mini_print), 0xCAFEBABE ).toString(16);
+    obj['zz'] = XXH.h64( JSON.stringify(obj), 0xCAFEBABE ).toString(16);
     obj['a2'] = getAppCodeName();
     obj['a3'] = getAppName();
     obj['a4'] = getAppVersion();
     obj['a5'] = getProduct(); // 1, 1
     obj['a6'] = getProductSub(); // 1, 2
-    obj['a7'] = XXH64(getNavigatorPrototype(), 0xA3FC ).toString(16); // 1, 4
+    obj['a7'] = XXH.h64(getNavigatorPrototype(), 0xA3FC ).toString(16); // 1, 4
     obj['a9'] = getBuildId();
     obj['b1'] = doNotTrack;
     obj['kk'] = navigator.pdfViewerEnabled;
@@ -1351,5 +1352,3 @@ for (let optionKey in options) {
 
 document.cookie = updatedCookie;
 }
-
-
