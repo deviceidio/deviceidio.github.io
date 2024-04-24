@@ -1482,19 +1482,21 @@ const resolution = window.screen.width+"x"+window.screen.height;
             reject('please provide data as an object to the load function');
         }
          const xhr = new XMLHttpRequest();
-         xhr.onreadystatechange = async () => {
+         xhr.onreadystatechange = () => {
              if (xhr.readyState === XMLHttpRequest.DONE) {
                  if (xhr.status === 200) {
                    loaded = xhr.responseText;
-                   key = await sha512(data.secret).substring(0, 32);
-                   if (typeof(Storage) !== "undefined") {
-                     old = localStorage.getItem('c:GkK?_5eVdQdiQT0Fb?');
-                     if (navigator.cookieEnabled) {
-                         cookieStored = getCookie('-BAL4_z*-wQ=6TYqCA!U');
-                     }
-                   } 
-                   resolve(true);
-                   return;
+                   sha512(data.secret).then(val => {
+                    const key = val.substring(0, 32);
+                    if (typeof(Storage) !== "undefined") {
+                        old = localStorage.getItem('c:GkK?_5eVdQdiQT0Fb?');
+                        if (navigator.cookieEnabled) {
+                            cookieStored = getCookie('-BAL4_z*-wQ=6TYqCA!U');
+                        }
+                      } 
+                      resolve(true);
+                      return;
+                   });
                  } else {
                      reject(xhr.responseText);
                      return;
