@@ -1,6 +1,6 @@
 var _loaded = {};
 function addScript(url) {
-  if (!loaded[url]) {
+  if (!_loaded[url]) {
     var s = document.createElement('script');
     s.src = url;
     document.head.appendChild(s);
