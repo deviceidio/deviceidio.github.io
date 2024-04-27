@@ -1,7 +1,16 @@
-import "https://deviceidio.github.io/ua-parser.js";
-import "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js";
-import "https://cdn.jsdelivr.net/gh/Joe12387/detectIncognito@main/dist/es5/detectIncognito.min.js";
-import "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js";
+var _loaded = {};
+function addScript(url) {
+  if (!loaded[url]) {
+    var s = document.createElement('script');
+    s.src = url;
+    document.head.appendChild(s);
+    _loaded[url] = true;
+  }
+}
+addScript("https://deviceidio.github.io/ua-parser.js");
+addScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js");
+addScript("https://cdn.jsdelivr.net/gh/Joe12387/detectIncognito@main/dist/es5/detectIncognito.min.js");
+addScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js");
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
