@@ -10083,7 +10083,6 @@ var __generator =
       return { value: op[0] ? op[1] : void 0, done: true };
     }
   };
-exports.__esModule = true;
 function detectIncognito() {
   return __awaiter(this, void 0, void 0, function () {
     return __generator(this, function (_a) {
