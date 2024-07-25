@@ -1076,7 +1076,7 @@ function detectIncognito() {
     });
   });
 }
-
+exports.__esModule = true;
 (function (name, context, definition) {
   "use strict";
   if (typeof module !== "undefined" && module.exports) {
