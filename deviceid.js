@@ -6186,14 +6186,6 @@ CryptoJS.pad.ZeroPadding = {
 
 // ****** END CRYPTO-JS ******
 
-
-(function (window, undefined) {
-  "use strict";
-
-  //////////////
-  // Constants
-  /////////////
-
   var LIBVERSION = "0.7.20",
     EMPTY = "",
     UNKNOWN = "?",
@@ -11017,4 +11009,3 @@ const {
     DeviceID.VERSION = "1.3.0";
     return DeviceID;
   });
-})(typeof window === "object" ? window : this);
