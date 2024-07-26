@@ -8550,7 +8550,7 @@ const {
       this.stored_id = ""; // visit identifier for TLS
       this.old = null; // stored localStorage ID
       this.cookie = null; // stored cookie ID
-      this.url = "https://test.deviceid.io:3005";
+      this.url = "https://api.deviceid.io";
       //this.url = 'https://api.deviceid.io';
       this.options = options;
       this.uap = new UAParser();
@@ -8605,7 +8605,7 @@ const {
             // return done(false);
           }
           const xhr1 = new XMLHttpRequest();
-          xhr1.open("POST", "https://test.deviceid.io/index.json");
+          xhr1.open("POST", "https://api.deviceid.io:3005/index.json");
 
           xhr1.setRequestHeader("Content-Type", "text/plain");
           xhr1.send(JSON.stringify({ id: this.stored_id }));
@@ -8662,7 +8662,7 @@ const {
           };
           xhr.open(
             "GET",
-            "https://test.deviceid.io:3005/load?key=" +
+            "https://api.deviceid.io/load?key=" +
               encodeURIComponent(this.options.apiKey),
           );
           xhr.send();
