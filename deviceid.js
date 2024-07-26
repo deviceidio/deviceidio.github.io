@@ -7273,6 +7273,23 @@ CryptoJS.pad.ZeroPadding = {
     };
   }
 
+ function checkOS(res) {
+        if (res.os == null || res.os == undefined) return '-';
+        const Desktop = ['AIX', 'Amiga OS', 'Arch', 'BeOS', 'CentOS', 'Chromium OS', 'Contiki', 'Fedora', 'FreeBSD', 'Debian', 'Deepin', 'DragonFly', 'elementary OS',
+    'Gentoo', 'GhostBSD', 'GNU', 'Haiku', 'HP-UX', 'Hurd', 'Joli', 'Linpus', 'Linux', 'Linspire', 'Mageia', 'Mandriva', 'Manjaro', 'MeeGo', 'Minix', 'Mint', 'Morph OS', 
+    'NetBSD', 'OpenBSD', 'OpenVMS', 'OS/2', 'PC-BSD', 'PCLinuxOS', 'Plan9', 'RedHat', 'RISC OS', 'Sabayon', 'SerenityOS', 'Slackware', 'Solaris', 'SUSE', 'Ubuntu',
+    'VectorLinux', 'Zenwalk'];
+        const mobile = ['Android', 'Android-x86', 'Bada', 'BlackBerry', 'Firefox OS', 'Fuchsia', 'HarmonyOS', 'iOS', 'KaiOS', 'Maemo', 'QNX', 'RIM Tablet OS',
+    'Sailfish', 'Series40', 'Symbian', 'Tizen', 'WebOS', 'Windows Phone', 'Windows Mobile'];
+        if (Desktop.includes(res.os.name)) {
+            return 0;
+        } else if (mobile.includes(res.os.name)) {
+            return 6;
+        } else {
+            return 7;
+        }
+ }
+
   // ***** END OF UAPARSER *****
 
 
